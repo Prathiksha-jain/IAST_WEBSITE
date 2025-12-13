@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IAST – Case Studies</title>
+
+    <!-- Fonts + Styles -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Navbar (injected automatically) -->
+    <div id="navbar-root"></div>
+
+    <main class="demo-content">
+      <div class="page-content" id="cases-page">
+        <h1>Case Studies</h1>
+        <p class="hero-subtitle">Success Stories from Our Portfolio</p>
+
+        <!-- ===============================
+             BY INDUSTRY 
+             (required for navbar submenu)
+        ================================== -->
+        <div class="case-study-section" id="by-industry">
+          <h2>By Industry</h2>
+
+          <!-- Automotive -->
+          <div class="case-card">
+            <div class="case-header">
+              <h3>🚗 Advanced Driver Assistance System (ADAS)</h3>
+              <span class="case-tag">Automotive</span>
+            </div>
+            <p>
+              Developed a complete ADAS solution for a leading automotive OEM,
+              including lane detection, collision avoidance, and adaptive cruise
+              control.
+            </p>
+            <div class="case-metrics">
+              <span>⏱️ 12 months</span>
+              <span>👥 25 engineers</span>
+              <span>📈 40% performance improvement</span>
+            </div>
+          </div>
+
+          <!-- Industrial -->
+          <div class="case-card">
+            <div class="case-header">
+              <h3>🏭 Smart Factory Automation</h3>
+              <span class="case-tag">Industrial</span>
+            </div>
+            <p>
+              Implemented Industry 4.0 solutions for a manufacturing plant,
+              achieving 30% efficiency gains through IoT integration and
+              predictive maintenance.
+            </p>
+            <div class="case-metrics">
+              <span>⏱️ 8 months</span>
+              <span>👥 15 engineers</span>
+              <span>📈 30% efficiency boost</span>
+            </div>
+          </div>
+
+          <!-- Aerospace -->
+          <div class="case-card">
+            <div class="case-header">
+              <h3>✈️ Avionics System Modernization</h3>
+              <span class="case-tag">Aerospace</span>
+            </div>
+            <p>
+              Upgraded legacy avionics systems with modern embedded software
+              architecture, ensuring compliance with DO-178C standards.
+            </p>
+            <div class="case-metrics">
+              <span>⏱️ 18 months</span>
+              <span>👥 30 engineers</span>
+              <span>📈 DO-178C certified</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===============================
+             BY TECHNOLOGY
+             (required for navbar submenu)
+        ================================== -->
+        <div class="case-study-section" id="by-tech">
+          <h2>By Technology</h2>
+
+          <!-- AI / ML -->
+          <div class="case-card">
+            <div class="case-header">
+              <h3>🤖 AI-Powered Quality Inspection</h3>
+              <span class="case-tag">AI/ML</span>
+            </div>
+            <p>
+              Created a computer vision system for automated quality inspection,
+              reducing defect rates by 45% and inspection time by 60%.
+            </p>
+            <div class="case-metrics">
+              <span>⏱️ 6 months</span>
+              <span>👥 10 engineers</span>
+              <span>📈 45% defect reduction</span>
+            </div>
+          </div>
+
+          <!-- Embedded / Automation (example categorization) -->
+          <div class="case-card">
+            <div class="case-header">
+              <h3>🏭 Smart Factory Automation</h3>
+              <span class="case-tag">Automation</span>
+            </div>
+            <p>
+              Implemented predictive maintenance & IoT-based automation for
+              real-time industrial monitoring.
+            </p>
+            <div class="case-metrics">
+              <span>⏱️ 8 months</span>
+              <span>👥 15 engineers</span>
+              <span>📈 30% efficiency boost</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-root"></div>
+    <script src="js/include-footer.js" defer></script>
+
+    <!-- Navbar include script -->
+    <script src="js/include-navbar.js" defer></script>
+
+    <!-- Smooth scroll for hash links -->
+    <script src="js/hash-scroll.js" defer></script>
+  </body>
+</html>

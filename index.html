@@ -1,4 +1,3 @@
-<!-- build trigger -->
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,2334 +8,38 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
     />
-    <script src="/_sdk/element_sdk.js"></script>
-    <style>
-      body {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(
-          135deg,
-          #0a0e27 0%,
-          #1a1d3a 50%,
-          #0a0e27 100%
-        );
-        min-height: 100%;
-        position: relative;
-        overflow-x: hidden;
-      }
 
-      html {
-        height: 100%;
-      }
-
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      /* Animated background */
-      .background-animation {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        z-index: 0;
-        pointer-events: none;
-      }
-
-      .tech-circle {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.1;
-        animation: float 20s infinite ease-in-out;
-      }
-
-      .circle-1 {
-        width: 300px;
-        height: 300px;
-        background: radial-gradient(circle, #004aad, transparent);
-        top: 10%;
-        left: 10%;
-        animation-delay: 0s;
-      }
-
-      .circle-2 {
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, #ff7a00, transparent);
-        top: 50%;
-        right: 10%;
-        animation-delay: 5s;
-      }
-
-      .circle-3 {
-        width: 250px;
-        height: 250px;
-        background: radial-gradient(circle, #0066cc, transparent);
-        bottom: 15%;
-        left: 40%;
-        animation-delay: 10s;
-      }
-
-      @keyframes float {
-        0%,
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-        33% {
-          transform: translate(30px, -30px) scale(1.1);
-        }
-        66% {
-          transform: translate(-20px, 20px) scale(0.9);
-        }
-      }
-
-      /* Navigation Container */
-      .nav-wrapper {
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 98%;
-        max-width: 1920px;
-        z-index: 1000;
-        padding: 0 20px;
-      }
-
-      .glass-navbar {
-        background: rgba(255, 255, 255, 0.08);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 20px;
-        padding: 18px 40px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
-          0 0 60px rgba(0, 74, 173, 0.15);
-        position: relative;
-        overflow: visible;
-      }
-
-      .glass-navbar::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 74, 173, 0.15) 0%,
-          rgba(0, 102, 204, 0.08) 100%
-        );
-        border-radius: 20px;
-        pointer-events: none;
-      }
-
-      .navbar-content {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        gap: 60px;
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Logo */
-      .logo {
-        font-size: 32px;
-        font-weight: 700;
-        color: white;
-        text-shadow: 0 0 20px rgba(0, 74, 173, 0.6);
-        white-space: nowrap;
-        letter-spacing: 1px;
-      }
-
-      /* Main Navigation */
-      .main-nav {
-        display: flex;
-        gap: 8px;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        justify-content: center;
-        flex-wrap: nowrap;
-      }
-
-      .nav-item {
-        position: relative;
-      }
-
-      .nav-link {
-        display: block;
-        color: white;
-        text-decoration: none;
-        font-size: 15px;
-        font-weight: 600;
-        padding: 14px 20px;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .nav-link::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(255, 255, 255, 0.1),
-          rgba(255, 255, 255, 0.05)
-        );
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: 12px;
-      }
-
-      .nav-link:hover::before {
-        opacity: 1;
-      }
-
-      .nav-link:hover {
-        color: #ff7a00;
-        text-shadow: 0 0 15px rgba(255, 122, 0, 0.6);
-      }
-
-      /* Dropdown Menu */
-      .dropdown {
-        position: absolute;
-        top: calc(100% + 12px);
-        left: 50%;
-        transform: translateX(-50%);
-        background: rgba(10, 14, 39, 0.95);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 16px;
-        padding: 12px;
-        min-width: 300px;
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5),
-          0 0 60px rgba(0, 74, 173, 0.2);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateX(-50%) translateY(-10px);
-        transition: all 0.3s ease;
-        z-index: 100;
-      }
-
-      .dropdown::before {
-        content: "";
-        position: absolute;
-        top: -6px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 12px;
-        height: 12px;
-        background: rgba(10, 14, 39, 0.95);
-        border-left: 1px solid rgba(255, 255, 255, 0.2);
-        border-top: 1px solid rgba(255, 255, 255, 0.2);
-        transform: translateX(-50%) rotate(45deg);
-      }
-
-      .nav-item:hover .dropdown {
-        opacity: 1;
-        visibility: visible;
-        transform: translateX(-50%) translateY(0);
-      }
-
-      .dropdown-item {
-        display: block;
-        color: rgba(255, 255, 255, 0.85);
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 13px 18px;
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .dropdown-item::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 74, 173, 0.3),
-          rgba(0, 102, 204, 0.2)
-        );
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        border-radius: 10px;
-      }
-
-      .dropdown-item:hover {
-        color: white;
-        box-shadow: 0 0 20px rgba(0, 174, 255, 0.4);
-        transform: translateX(4px);
-      }
-
-      .dropdown-item:hover::before {
-        opacity: 1;
-      }
-
-      .dropdown-item span {
-        position: relative;
-        z-index: 1;
-      }
-
-      /* CTA Buttons */
-      .cta-buttons {
-        display: flex;
-        gap: 16px;
-        flex-shrink: 0;
-        justify-content: flex-end;
-        min-width: auto;
-      }
-
-      .btn {
-        padding: 14px 28px;
-        font-size: 14px;
-        font-weight: 600;
-        border-radius: 12px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        white-space: nowrap;
-        position: relative;
-        overflow: hidden;
-        cursor: pointer;
-        display: inline-block;
-      }
-
-      .btn-primary {
-        background: #ff7a00;
-        color: white;
-        border: none;
-        box-shadow: 0 4px 20px rgba(255, 122, 0, 0.3);
-      }
-
-      .btn-primary::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.2);
-        transform: translate(-50%, -50%);
-        transition: width 0.5s ease, height 0.5s ease;
-      }
-
-      .btn-primary:hover::before {
-        width: 300px;
-        height: 300px;
-      }
-
-      .btn-primary:hover {
-        box-shadow: 0 0 30px rgba(255, 122, 0, 0.6),
-          0 0 60px rgba(255, 122, 0, 0.3);
-        transform: translateY(-2px);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: white;
-        border: 2px solid #004aad;
-        position: relative;
-      }
-
-      .btn-secondary::before {
-        content: "";
-        position: absolute;
-        top: -2px;
-        left: -2px;
-        right: -2px;
-        bottom: -2px;
-        background: linear-gradient(45deg, #004aad, #00aeff, #004aad, #00aeff);
-        background-size: 300% 300%;
-        border-radius: 12px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        animation: glowing 3s linear infinite;
-        z-index: -1;
-      }
-
-      @keyframes glowing {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      .btn-secondary:hover::before {
-        opacity: 1;
-      }
-
-      .btn-secondary:hover {
-        box-shadow: 0 0 30px rgba(0, 74, 173, 0.6);
-        transform: translateY(-2px);
-        border-color: transparent;
-      }
-
-      .btn span {
-        position: relative;
-        z-index: 1;
-      }
-
-      /* Demo Content Area */
-      .demo-content {
-        position: relative;
-        z-index: 1;
-        max-width: 1400px;
-        margin: 0 auto;
-        padding: 0;
-        text-align: center;
-        width: 100%;
-      }
-
-      .demo-content h1 {
-        font-size: 56px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 24px;
-        text-shadow: 0 0 40px rgba(0, 174, 255, 0.4);
-        line-height: 1.2;
-      }
-
-      .demo-content p {
-        font-size: 20px;
-        color: rgba(255, 255, 255, 0.8);
-        margin-bottom: 40px;
-        line-height: 1.6;
-      }
-
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin-top: 60px;
-      }
-
-      .feature-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        transition: all 0.3s ease;
-      }
-
-      .feature-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        box-shadow: 0 8px 32px rgba(0, 174, 255, 0.2);
-        transform: translateY(-8px);
-      }
-
-      .feature-icon {
-        font-size: 48px;
-        margin-bottom: 20px;
-      }
-
-      .feature-card h3 {
-        font-size: 20px;
-        font-weight: 600;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .feature-card p {
-        font-size: 15px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin: 0;
-      }
-
-      /* Floating Sticky CTA Button */
-      .floating-cta {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        z-index: 9999;
-        padding: 16px 32px;
-        background: #ff7a00;
-        color: white;
-        font-size: 16px;
-        font-weight: 700;
-        border-radius: 50px;
-        text-decoration: none;
-        box-shadow: 0 8px 24px rgba(255, 122, 0, 0.4);
-        transition: all 0.3s ease;
-        cursor: pointer;
-        border: none;
-        white-space: nowrap;
-        animation: pulse 2s ease-in-out infinite;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-      }
-
-      .floating-cta:hover {
-        background: #e66d00;
-        box-shadow: 0 0 40px rgba(255, 122, 0, 0.7),
-          0 0 80px rgba(255, 122, 0, 0.4);
-        transform: translateY(-4px) scale(1.05);
-        animation: none;
-      }
-
-      .floating-cta:active {
-        transform: translateY(-2px) scale(1.02);
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          box-shadow: 0 8px 24px rgba(255, 122, 0, 0.4);
-        }
-        50% {
-          box-shadow: 0 8px 32px rgba(255, 122, 0, 0.6),
-            0 0 40px rgba(255, 122, 0, 0.3);
-        }
-      }
-
-      /* Footer Styles */
-      footer {
-        width: 100%;
-        background: linear-gradient(135deg, #002a5c 0%, #003366 100%);
-        position: relative;
-        z-index: 1;
-        margin-top: 0;
-      }
-
-      .footer-container {
-        max-width: 1600px;
-        margin: 0 auto;
-        padding: 60px 40px 30px;
-      }
-
-      /* Row 1 - Contact Section */
-      .footer-contact {
-        margin-bottom: 50px;
-        padding-bottom: 40px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .footer-section-title {
-        font-size: 24px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 8px;
-        position: relative;
-        display: inline-block;
-      }
-
-      .footer-section-title::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 60px;
-        height: 3px;
-        background: #ff7a00;
-        border-radius: 2px;
-      }
-
-      .contact-details {
-        margin-top: 24px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-
-      .contact-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        font-size: 15px;
-        color: #d6d9df;
-        line-height: 1.6;
-      }
-
-      .contact-icon {
-        font-size: 18px;
-        margin-top: 2px;
-        flex-shrink: 0;
-      }
-
-      .contact-item a {
-        color: #d6d9df;
-        text-decoration: none;
-        transition: color 0.3s ease;
-      }
-
-      .contact-item a:hover {
-        color: #ff7a00;
-      }
-
-      /* Row 2 - Quick Links */
-      .footer-links {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 40px;
-        margin-bottom: 50px;
-        padding-bottom: 40px;
-      }
-
-      .footer-column h3 {
-        font-size: 18px;
-        font-weight: 600;
-        color: white;
-        margin-bottom: 8px;
-        position: relative;
-        display: inline-block;
-      }
-
-      .footer-column h3::after {
-        content: "";
-        position: absolute;
-        bottom: -4px;
-        left: 0;
-        width: 40px;
-        height: 2px;
-        background: #ff7a00;
-        border-radius: 2px;
-      }
-
-      .footer-column ul {
-        list-style: none;
-        padding: 0;
-        margin: 20px 0 0 0;
-      }
-
-      .footer-column li {
-        margin-bottom: 12px;
-      }
-
-      .footer-column a {
-        color: #d6d9df;
-        text-decoration: none;
-        font-size: 14px;
-        transition: all 0.3s ease;
-        display: inline-block;
-      }
-
-      .footer-column a:hover {
-        color: white;
-        transform: translateX(4px);
-      }
-
-      .footer-column a.highlight {
-        color: #ff7a00;
-        font-weight: 600;
-      }
-
-      .footer-column a.highlight:hover {
-        color: #ff9933;
-      }
-
-      /* Row 3 - Social & Copyright */
-      .footer-bottom {
-        border-top: 2px solid #ff7a00;
-        padding-top: 30px;
-        text-align: center;
-      }
-
-      .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        margin-bottom: 20px;
-      }
-
-      .social-icon {
-        width: 40px;
-        height: 40px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 20px;
-        text-decoration: none;
-        transition: all 0.3s ease;
-      }
-
-      .social-icon:hover {
-        background: #ff7a00;
-        transform: translateY(-4px);
-        box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
-      }
-
-      .copyright {
-        font-size: 14px;
-        color: #d6d9df;
-        line-height: 1.6;
-      }
-
-      /* Locations Grid */
-      .locations-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-        margin-top: 24px;
-      }
-
-      .location-card {
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 20px;
-        transition: all 0.3s ease;
-      }
-
-      .location-card:hover {
-        background: rgba(255, 255, 255, 0.08);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-4px);
-      }
-
-      .location-card h4 {
-        font-size: 16px;
-        color: #ff7a00;
-        margin: 0 0 12px 0;
-        font-weight: 600;
-      }
-
-      .location-card p {
-        font-size: 14px;
-        color: #d6d9df;
-        line-height: 1.8;
-        margin: 0;
-      }
-
-      /* Page Content Styles */
-      .page-content {
-        animation: fadeIn 0.5s ease-in-out;
-        padding-top: 120px;
-      }
-
-      #home-page {
-        padding-top: 0;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      /* Hero Carousel Styles */
-      .hero-carousel-container {
-        width: 100%;
-        height: 100%;
-        min-height: 500px;
-        position: relative;
-        margin-bottom: 0;
-        margin-top: 110px;
-        overflow: hidden;
-        border-radius: 0;
-      }
-
-      .hero-carousel-wrapper {
-        width: 100%;
-        height: 100%;
-        position: relative;
-      }
-
-      .hero-carousel-track {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        position: relative;
-      }
-
-      .hero-slide {
-        min-width: 100%;
-        height: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(
-          135deg,
-          rgba(0, 74, 173, 0.2) 0%,
-          rgba(255, 122, 0, 0.15) 100%
-        );
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        transition: opacity 1s ease-in-out;
-        padding: 40px;
-      }
-
-      .hero-slide-active {
-        opacity: 1;
-        z-index: 1;
-      }
-
-      .hero-slide-content {
-        text-align: center;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .hero-slide-title {
-        font-size: 56px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 20px;
-        text-shadow: 0 0 40px rgba(0, 174, 255, 0.5);
-        line-height: 1.2;
-        animation: slideInUp 0.8s ease-out;
-      }
-
-      .hero-slide-subtitle {
-        font-size: 24px;
-        color: #ff7a00;
-        font-weight: 500;
-        text-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
-        animation: slideInUp 0.8s ease-out 0.2s backwards;
-      }
-
-      @keyframes slideInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      .hero-carousel-dots {
-        position: absolute;
-        bottom: 30px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 12px;
-        z-index: 10;
-      }
-
-      .hero-dot {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.4);
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .hero-dot:hover {
-        background: rgba(255, 255, 255, 0.7);
-        transform: scale(1.2);
-      }
-
-      .hero-dot-active {
-        background: #ff7a00;
-        width: 32px;
-        border-radius: 6px;
-      }
-
-      /* Welcome Section Styles */
-      .welcome-section {
-        text-align: center;
-        padding: 80px 40px 80px;
-        margin-bottom: 0;
-        width: 100%;
-      }
-
-      .welcome-section h1 {
-        font-size: 64px;
-        font-weight: 700;
-        color: white;
-        margin-bottom: 20px;
-        text-shadow: 0 0 40px rgba(0, 174, 255, 0.4);
-        line-height: 1.2;
-      }
-
-      .hero-subtitle {
-        font-size: 28px;
-        color: #ff7a00;
-        font-weight: 600;
-        margin-bottom: 24px;
-        text-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
-      }
-
-      .hero-description {
-        font-size: 18px;
-        color: rgba(255, 255, 255, 0.85);
-        max-width: 800px;
-        margin: 0 auto 60px;
-        line-height: 1.8;
-      }
-
-      .hero-stats {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 32px;
-        max-width: 1000px;
-        margin: 0 auto;
-      }
-
-      .hero-stat-item {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px 24px;
-        transition: all 0.3s ease;
-      }
-
-      .hero-stat-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-8px);
-        box-shadow: 0 12px 32px rgba(255, 122, 0, 0.2);
-      }
-
-      .hero-stat-number {
-        font-size: 48px;
-        font-weight: 700;
-        color: #ff7a00;
-        margin-bottom: 8px;
-        text-shadow: 0 0 20px rgba(255, 122, 0, 0.3);
-      }
-
-      .hero-stat-label {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.8);
-        font-weight: 500;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-      }
-
-      /* Section Headers */
-      .section-header-centered {
-        text-align: center;
-        margin-bottom: 50px;
-      }
-
-      .section-header-centered h2 {
-        font-size: 40px;
-        color: white;
-        font-weight: 700;
-        margin-bottom: 16px;
-        text-shadow: 0 0 30px rgba(0, 174, 255, 0.3);
-      }
-
-      .section-underline {
-        width: 80px;
-        height: 4px;
-        background: linear-gradient(90deg, transparent, #ff7a00, transparent);
-        margin: 0 auto 20px;
-        border-radius: 2px;
-      }
-
-      .section-subtitle {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.7);
-        max-width: 600px;
-        margin: 0 auto;
-        line-height: 1.6;
-      }
-
-      .content-section {
-        margin-bottom: 0;
-        padding: 80px 40px;
-        width: 100%;
-      }
-
-      .content-section h2 {
-        font-size: 32px;
-        color: white;
-        margin-bottom: 24px;
-        position: relative;
-        display: inline-block;
-      }
-
-      .content-section h2::after {
-        content: "";
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 60px;
-        height: 3px;
-        background: #ff7a00;
-        border-radius: 2px;
-      }
-
-      /* About Preview Section */
-      .about-preview {
-        padding: 80px 40px;
-        width: 100%;
-      }
-
-      .about-content-wrapper {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: 60px;
-        align-items: center;
-        margin-top: 40px;
-      }
-
-      .about-text-content {
-        padding-right: 20px;
-      }
-
-      .about-lead {
-        font-size: 22px;
-        font-weight: 600;
-        color: white;
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-
-      .about-text-content p {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.8;
-        margin-bottom: 16px;
-      }
-
-      .cta-btn-large {
-        background: #ff7a00;
-        color: white;
-        border: none;
-        padding: 16px 40px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: inline-block;
-        margin-top: 24px;
-        text-decoration: none;
-      }
-
-      .cta-btn-large:hover {
-        background: #e66d00;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(255, 122, 0, 0.4);
-      }
-
-      .about-visual {
-        display: flex;
-        flex-direction: column;
-        gap: 24px;
-      }
-
-      .visual-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .visual-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateX(8px);
-        box-shadow: 0 8px 32px rgba(0, 174, 255, 0.2);
-      }
-
-      .visual-icon {
-        font-size: 56px;
-        margin-bottom: 16px;
-      }
-
-      .visual-card h4 {
-        font-size: 20px;
-        color: white;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-
-      .visual-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0;
-        line-height: 1.6;
-      }
-
-      /* Services Section */
-      .services-section {
-        padding: 80px 40px;
-        background: transparent;
-        border-radius: 0;
-      }
-
-      /* Why Choose Section */
-      .why-choose-section {
-        padding: 80px 40px;
-        background: transparent;
-      }
-
-      /* Partners Section */
-      .partners-section {
-        padding: 80px 40px;
-        background: transparent;
-        border-radius: 0;
-      }
-
-      /* Stats Grid */
-      .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 24px;
-        margin-bottom: 60px;
-      }
-
-      .stat-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .stat-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-8px);
-      }
-
-      .stat-number {
-        font-size: 48px;
-        font-weight: 700;
-        color: #ff7a00;
-        margin-bottom: 8px;
-      }
-
-      .stat-label {
-        font-size: 16px;
-        color: rgba(255, 255, 255, 0.8);
-      }
-
-      /* Values Grid */
-      .values-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 24px;
-      }
-
-      .value-item {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 24px;
-        transition: all 0.3s ease;
-      }
-
-      .value-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateY(-4px);
-      }
-
-      .value-item h3 {
-        font-size: 18px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .value-item p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0;
-      }
-
-      /* Services Grid */
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-        gap: 28px;
-      }
-
-      .service-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        transition: all 0.3s ease;
-      }
-
-      .service-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        box-shadow: 0 8px 32px rgba(0, 174, 255, 0.2);
-        transform: translateY(-8px);
-      }
-
-      .service-icon {
-        font-size: 52px;
-        margin-bottom: 20px;
-        display: block;
-      }
-
-      .service-card h3 {
-        font-size: 22px;
-        color: white;
-        margin-bottom: 16px;
-      }
-
-      .service-card p {
-        font-size: 15px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-
-      .service-features {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      .service-features li {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.6);
-        padding: 8px 0;
-        padding-left: 24px;
-        position: relative;
-      }
-
-      .service-features li::before {
-        content: "✓";
-        position: absolute;
-        left: 0;
-        color: #ff7a00;
-        font-weight: bold;
-      }
-
-      /* Solutions Grid */
-      .solutions-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin-top: 24px;
-      }
-
-      .solution-card {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 28px;
-        transition: all 0.3s ease;
-      }
-
-      .solution-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-4px);
-      }
-
-      .solution-card h3 {
-        font-size: 20px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .solution-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0;
-      }
-
-      /* Case Studies */
-      .case-study-section {
-        margin-top: 40px;
-      }
-
-      .case-study-section h2 {
-        font-size: 32px;
-        color: white;
-        margin-bottom: 32px;
-      }
-
-      .case-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        margin-bottom: 24px;
-        transition: all 0.3s ease;
-      }
-
-      .case-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateX(8px);
-      }
-
-      .case-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 16px;
-        flex-wrap: wrap;
-        gap: 12px;
-      }
-
-      .case-header h3 {
-        font-size: 24px;
-        color: white;
-        margin: 0;
-        flex: 1;
-      }
-
-      .case-tag {
-        background: rgba(255, 122, 0, 0.2);
-        color: #ff7a00;
-        padding: 6px 16px;
-        border-radius: 20px;
-        font-size: 13px;
-        font-weight: 600;
-      }
-
-      .case-card p {
-        font-size: 15px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-
-      .case-metrics {
-        display: flex;
-        gap: 24px;
-        flex-wrap: wrap;
-      }
-
-      .case-metrics span {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      /* Insights */
-      .insights-section {
-        margin-bottom: 60px;
-      }
-
-      .insights-section h2 {
-        font-size: 32px;
-        color: white;
-        margin-bottom: 24px;
-      }
-
-      .insights-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-      }
-
-      .insight-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 28px;
-        transition: all 0.3s ease;
-      }
-
-      .insight-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateY(-8px);
-      }
-
-      .insight-date {
-        font-size: 13px;
-        color: #ff7a00;
-        font-weight: 600;
-        margin-bottom: 12px;
-      }
-
-      .insight-card h3 {
-        font-size: 20px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .insight-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin-bottom: 16px;
-      }
-
-      .read-more {
-        color: #ff7a00;
-        text-decoration: none;
-        font-size: 14px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
-
-      .read-more:hover {
-        color: #ff9933;
-        transform: translateX(4px);
-        display: inline-block;
-      }
-
-      .news-list {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .news-item {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 24px;
-        transition: all 0.3s ease;
-      }
-
-      .news-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-        transform: translateX(8px);
-      }
-
-      .news-date {
-        font-size: 13px;
-        color: #ff7a00;
-        font-weight: 600;
-        display: block;
-        margin-bottom: 8px;
-      }
-
-      .news-item h3 {
-        font-size: 18px;
-        color: white;
-        margin-bottom: 8px;
-      }
-
-      .news-item p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0;
-      }
-
-      /* Careers */
-      .benefits-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-        margin-top: 24px;
-      }
-
-      .benefit-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 28px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .benefit-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateY(-8px);
-      }
-
-      .benefit-icon {
-        font-size: 48px;
-        margin-bottom: 16px;
-      }
-
-      .benefit-card h3 {
-        font-size: 20px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .benefit-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin: 0;
-      }
-
-      .job-listings {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 24px;
-        margin-top: 24px;
-      }
-
-      .job-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 28px;
-        transition: all 0.3s ease;
-      }
-
-      .job-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-4px);
-      }
-
-      .job-card h3 {
-        font-size: 22px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .job-meta {
-        display: flex;
-        gap: 16px;
-        flex-wrap: wrap;
-        margin-bottom: 16px;
-      }
-
-      .job-meta span {
-        font-size: 13px;
-        color: rgba(255, 255, 255, 0.6);
-      }
-
-      .job-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin-bottom: 20px;
-      }
-
-      .apply-btn {
-        background: #ff7a00;
-        color: white;
-        border: none;
-        padding: 12px 28px;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-      }
-
-      .apply-btn:hover {
-        background: #e66d00;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(255, 122, 0, 0.4);
-      }
-
-      /* Contact Page */
-      .contact-layout {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: 40px;
-        margin-top: 40px;
-      }
-
-      .contact-form-section h2,
-      .contact-info-section h2 {
-        font-size: 28px;
-        color: white;
-        margin-bottom: 24px;
-      }
-
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-      }
-
-      .form-group label {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.9);
-        margin-bottom: 8px;
-        font-weight: 500;
-      }
-
-      .form-group input,
-      .form-group textarea {
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 8px;
-        padding: 12px 16px;
-        font-size: 15px;
-        color: white;
-        font-family: "Poppins", sans-serif;
-        transition: all 0.3s ease;
-      }
-
-      .form-group input:focus,
-      .form-group textarea:focus {
-        outline: none;
-        border-color: #ff7a00;
-        background: rgba(255, 255, 255, 0.12);
-        box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.1);
-      }
-
-      .form-group input::placeholder,
-      .form-group textarea::placeholder {
-        color: rgba(255, 255, 255, 0.4);
-      }
-
-      .submit-btn {
-        background: #ff7a00;
-        color: white;
-        border: none;
-        padding: 14px 32px;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        align-self: flex-start;
-      }
-
-      .submit-btn:hover {
-        background: #e66d00;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 16px rgba(255, 122, 0, 0.4);
-      }
-
-      .contact-info-card {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 24px;
-        margin-bottom: 20px;
-      }
-
-      .info-icon {
-        font-size: 32px;
-        margin-bottom: 12px;
-      }
-
-      .contact-info-card h3 {
-        font-size: 18px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .contact-info-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.8;
-        margin: 0;
-      }
-
-      .contact-info-card a {
-        display: block;
-        color: rgba(255, 255, 255, 0.8);
-        text-decoration: none;
-        font-size: 14px;
-        margin-bottom: 6px;
-        transition: color 0.3s ease;
-      }
-
-      .contact-info-card a:hover {
-        color: #ff7a00;
-      }
-
-      .social-connect {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 24px;
-      }
-
-      .social-connect h3 {
-        font-size: 18px;
-        color: white;
-        margin-bottom: 16px;
-      }
-
-      .social-buttons {
-        display: flex;
-        gap: 12px;
-      }
-
-      .social-btn {
-        flex: 1;
-        background: rgba(255, 122, 0, 0.2);
-        color: white;
-        text-decoration: none;
-        padding: 12px 20px;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.3s ease;
-      }
-
-      .social-btn:hover {
-        background: #ff7a00;
-        transform: translateY(-2px);
-      }
-
-      /* CTA Button */
-      .cta-btn {
-        background: #ff7a00;
-        color: white;
-        border: none;
-        padding: 16px 40px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        display: inline-block;
-        text-decoration: none;
-      }
-
-      .cta-btn:hover {
-        background: #e66d00;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(255, 122, 0, 0.4);
-      }
-
-      /* Carousel Styles */
-      .carousel-container {
-        position: relative;
-        max-width: 100%;
-        margin: 40px 0;
-        padding: 0 60px;
-      }
-
-      .carousel-wrapper {
-        overflow: hidden;
-        border-radius: 16px;
-      }
-
-      .carousel-track {
-        display: flex;
-        gap: 24px;
-        transition: transform 0.5s ease;
-      }
-
-      .carousel-card {
-        min-width: calc(33.333% - 16px);
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        flex-shrink: 0;
-        position: relative;
-      }
-
-      .carousel-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateY(-8px);
-        box-shadow: 0 8px 32px rgba(0, 174, 255, 0.2);
-      }
-
-      .clickable-service-card {
-        cursor: pointer;
-      }
-
-      .clickable-service-card:hover {
-        background: rgba(255, 122, 0, 0.15);
-        border-color: rgba(255, 122, 0, 0.6);
-        box-shadow: 0 12px 40px rgba(255, 122, 0, 0.3);
-      }
-
-      .card-click-hint {
-        margin-top: 16px;
-        font-size: 13px;
-        color: #ff7a00;
-        font-weight: 600;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-      }
-
-      .clickable-service-card:hover .card-click-hint {
-        opacity: 1;
-      }
-
-      .carousel-card .service-icon {
-        font-size: 52px;
-        margin-bottom: 20px;
-      }
-
-      .carousel-card h3 {
-        font-size: 20px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .carousel-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0;
-      }
-
-      .carousel-btn {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255, 122, 0, 0.8);
-        color: white;
-        border: none;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        font-size: 24px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 10;
-      }
-
-      .carousel-btn:hover {
-        background: #ff7a00;
-        box-shadow: 0 4px 16px rgba(255, 122, 0, 0.4);
-      }
-
-      .carousel-btn.prev {
-        left: 0;
-      }
-
-      .carousel-btn.next {
-        right: 0;
-      }
-
-      /* Why Choose Us Grid */
-      .why-choose-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-        margin-top: 40px;
-      }
-
-      .why-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .why-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-8px);
-        box-shadow: 0 8px 32px rgba(255, 122, 0, 0.2);
-      }
-
-      .why-icon {
-        font-size: 48px;
-        margin-bottom: 20px;
-      }
-
-      .why-card h3 {
-        font-size: 20px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .why-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin: 0;
-      }
-
-      /* Partners Carousel */
-      .partners-carousel-container {
-        width: 100%;
-        overflow: hidden;
-        margin-top: 40px;
-        position: relative;
-      }
-
-      .partners-carousel-wrapper {
-        width: 100%;
-        overflow: hidden;
-      }
-
-      .partners-carousel-track {
-        display: flex;
-        gap: 24px;
-        animation: partnersScroll 30s linear infinite;
-        width: fit-content;
-      }
-
-      @keyframes partnersScroll {
-        0% {
-          transform: translateX(0);
-        }
-        100% {
-          transform: translateX(-50%);
-        }
-      }
-
-      .partners-carousel-track:hover {
-        animation-play-state: paused;
-      }
-
-      .partner-logo {
-        background: rgba(255, 255, 255, 0.06);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        padding: 40px 30px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: 600;
-        color: rgba(255, 255, 255, 0.8);
-        transition: all 0.3s ease;
-        min-width: 200px;
-        flex-shrink: 0;
-      }
-
-      .partner-logo:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateY(-4px);
-        box-shadow: 0 4px 16px rgba(0, 174, 255, 0.2);
-      }
-
-      /* Life at IAST Styles */
-      .life-features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 24px;
-        margin-top: 40px;
-      }
-
-      .life-feature-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .life-feature-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(0, 174, 255, 0.5);
-        transform: translateY(-8px);
-        box-shadow: 0 8px 32px rgba(0, 174, 255, 0.2);
-      }
-
-      .life-icon {
-        font-size: 52px;
-        margin-bottom: 20px;
-      }
-
-      .life-feature-card h3 {
-        font-size: 20px;
-        color: white;
-        margin-bottom: 12px;
-      }
-
-      .life-feature-card p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        line-height: 1.6;
-        margin: 0;
-      }
-
-      /* Testimonials */
-      .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-        gap: 28px;
-        margin-top: 40px;
-      }
-
-      .testimonial-card {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 32px;
-        transition: all 0.3s ease;
-        position: relative;
-      }
-
-      .testimonial-card:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 122, 0, 0.5);
-        transform: translateY(-8px);
-        box-shadow: 0 8px 32px rgba(255, 122, 0, 0.2);
-      }
-
-      .testimonial-quote {
-        font-size: 64px;
-        color: rgba(255, 122, 0, 0.3);
-        line-height: 1;
-        margin-bottom: 16px;
-        font-family: Georgia, serif;
-      }
-
-      .testimonial-text {
-        font-size: 15px;
-        color: rgba(255, 255, 255, 0.8);
-        line-height: 1.7;
-        margin-bottom: 24px;
-        font-style: italic;
-      }
-
-      .testimonial-author {
-        display: flex;
-        gap: 16px;
-        align-items: center;
-        padding-top: 20px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-      }
-
-      .author-avatar {
-        font-size: 48px;
-        flex-shrink: 0;
-      }
-
-      .author-info h4 {
-        font-size: 16px;
-        color: white;
-        margin: 0 0 4px 0;
-      }
-
-      .author-info p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 0 0 4px 0;
-      }
-
-      .tenure {
-        font-size: 12px;
-        color: rgba(255, 122, 0, 0.8);
-        font-weight: 500;
-      }
-
-      /* Responsive */
-      @media (max-width: 1600px) {
-        .navbar-content {
-          gap: 40px;
-        }
-
-        .nav-link {
-          font-size: 14px;
-          padding: 12px 16px;
-        }
-
-        .main-nav {
-          gap: 4px;
-        }
-
-        .btn {
-          padding: 12px 24px;
-          font-size: 13px;
-        }
-
-        .floating-cta {
-          padding: 14px 28px;
-          font-size: 15px;
-          bottom: 20px;
-          right: 20px;
-        }
-
-        .footer-links {
-          gap: 30px;
-        }
-      }
-
-      @media (max-width: 1400px) {
-        .navbar-content {
-          gap: 30px;
-        }
-
-        .nav-link {
-          font-size: 13px;
-          padding: 12px 14px;
-        }
-
-        .main-nav {
-          gap: 2px;
-        }
-
-        .logo {
-          font-size: 28px;
-        }
-
-        .btn {
-          padding: 11px 20px;
-          font-size: 12px;
-        }
-      }
-
-      @media (max-width: 1200px) {
-        .navbar-content {
-          display: flex;
-          flex-direction: column;
-          gap: 20px;
-        }
-
-        .main-nav {
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 4px;
-        }
-
-        .cta-buttons {
-          min-width: auto;
-          width: 100%;
-          justify-content: center;
-        }
-
-        .footer-links {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 40px;
-        }
-      }
-
-      @media (max-width: 768px) {
-        .nav-wrapper {
-          width: 98%;
-          padding: 0 10px;
-        }
-
-        .glass-navbar {
-          padding: 16px 20px;
-        }
-
-        .main-nav {
-          flex-direction: column;
-          width: 100%;
-        }
-
-        .nav-link {
-          text-align: center;
-        }
-
-        .cta-buttons {
-          flex-direction: column;
-          width: 100%;
-        }
-
-        .btn {
-          width: 100%;
-        }
-
-        .demo-content {
-          padding: 60px 20px;
-        }
-
-        .demo-content h1 {
-          font-size: 36px;
-        }
-
-        .demo-content p {
-          font-size: 16px;
-        }
-
-        .feature-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .floating-cta {
-          padding: 12px 24px;
-          font-size: 14px;
-          bottom: 16px;
-          right: 16px;
-        }
-
-        .footer-container {
-          padding: 40px 20px 20px;
-        }
-
-        .footer-links {
-          grid-template-columns: 1fr;
-          gap: 30px;
-        }
-
-        .footer-section-title {
-          font-size: 20px;
-        }
-
-        .contact-item {
-          font-size: 14px;
-        }
-
-        .contact-layout {
-          grid-template-columns: 1fr;
-        }
-
-        .services-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .stats-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .job-listings {
-          grid-template-columns: 1fr;
-        }
-
-        .carousel-container {
-          padding: 0 50px;
-        }
-
-        .carousel-card {
-          min-width: 100%;
-        }
-
-        .carousel-btn {
-          width: 40px;
-          height: 40px;
-          font-size: 20px;
-        }
-
-        .why-choose-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .partners-grid {
-          grid-template-columns: repeat(2, 1fr);
-        }
-
-        .testimonials-grid {
-          grid-template-columns: 1fr;
-        }
-
-        .locations-grid {
-          grid-template-columns: 1fr;
-        }
-
-        /* Hero Carousel Mobile */
-        .hero-carousel-container {
-          min-height: 350px;
-        }
-
-        .hero-slide {
-          height: 350px;
-          padding: 20px;
-        }
-
-        .hero-slide-title {
-          font-size: 32px;
-        }
-
-        .hero-slide-subtitle {
-          font-size: 16px;
-        }
-
-        .hero-carousel-dots {
-          bottom: 20px;
-        }
-
-        /* Welcome Section Mobile */
-        .welcome-section h1 {
-          font-size: 36px;
-        }
-
-        .hero-subtitle {
-          font-size: 20px;
-        }
-
-        .hero-description {
-          font-size: 16px;
-        }
-
-        .hero-stats {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 16px;
-        }
-
-        .hero-stat-number {
-          font-size: 36px;
-        }
-
-        .hero-stat-label {
-          font-size: 12px;
-        }
-
-        /* Section Headers Mobile */
-        .section-header-centered h2 {
-          font-size: 28px;
-        }
-
-        .section-subtitle {
-          font-size: 14px;
-        }
-
-        /* About Content Mobile */
-        .about-content-wrapper {
-          grid-template-columns: 1fr;
-          gap: 40px;
-        }
-
-        .about-text-content {
-          padding-right: 0;
-        }
-
-        .about-lead {
-          font-size: 18px;
-        }
-
-        .about-text-content p {
-          font-size: 15px;
-        }
-
-        /* Sections Mobile */
-        .content-section {
-          margin-bottom: 60px;
-        }
-
-        .services-section,
-        .why-choose-section,
-        .partners-section {
-          padding: 40px 20px;
-        }
-      }
-    </style>
-    <style>
-      @view-transition {
-        navigation: auto;
-      }
-    </style>
-    <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon" />
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link
+      href="assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS File -->
+    <link href="assets/css/main1.css" rel="stylesheet" />
+    <link href="style.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
   </head>
   <body>
@@ -2345,495 +48,992 @@
       <div class="tech-circle circle-2"></div>
       <div class="tech-circle circle-3"></div>
     </div>
-    <nav class="nav-wrapper">
-      <div class="glass-navbar">
-        <div class="navbar-content">
-          <div class="logo" id="company-name">IAST</div>
-          <ul class="main-nav">
-            <li class="nav-item">
-              <a
-                href="#home"
-                class="nav-link"
-                onclick="showPage('home-page'); return false;"
-                >Home</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                href="#about"
-                class="nav-link"
-                onclick="showPage('about-page'); return false;"
-                >About Us</a
-              >
-              <div class="dropdown">
-                <a href="#company-overview" class="dropdown-item"
-                  ><span>Company Overview</span></a
-                >
-                <a href="#leadership" class="dropdown-item"
-                  ><span>Leadership Team</span></a
-                >
-                <a href="#vision" class="dropdown-item"
-                  ><span>Vision, Mission &amp; Values</span></a
-                >
-                <a href="#infrastructure" class="dropdown-item"
-                  ><span>Infrastructure &amp; Labs</span></a
-                >
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                href="#services"
-                class="nav-link"
-                onclick="showPage('services-page'); return false;"
-                >Services</a
-              >
-              <div class="dropdown">
-                <a href="#embedded" class="dropdown-item"
-                  ><span>Embedded Software Development</span></a
-                >
-                <a href="#automotive" class="dropdown-item"
-                  ><span>Automotive &amp; AUTOSAR Solutions</span></a
-                >
-                <a href="#product-eng" class="dropdown-item"
-                  ><span>Product Engineering</span></a
-                >
-                <a href="#ai-ml" class="dropdown-item"
-                  ><span>AI/ML &amp; Computer Vision</span></a
-                >
-                <a href="#iot" class="dropdown-item"
-                  ><span>IoT &amp; Cloud Systems</span></a
-                >
-                <a href="#industry4" class="dropdown-item"
-                  ><span>Industry 4.0 &amp; Digital Transformation</span></a
-                >
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                href="#solutions"
-                class="nav-link"
-                onclick="showPage('solutions-page'); return false;"
-                >Solutions / Platforms</a
-              >
-              <div class="dropdown">
-                <a
-                  href="#rd-products"
-                  class="dropdown-item"
-                  onclick="showPage('solutions-page'); return false;"
-                  ><span>R&amp;D Products</span></a
-                >
-                <a
-                  href="#tools"
-                  class="dropdown-item"
-                  onclick="showPage('solutions-page'); return false;"
-                  ><span>Tools &amp; Frameworks</span></a
-                >
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                href="#cases"
-                class="nav-link"
-                onclick="showPage('cases-page'); return false;"
-                >Case Studies</a
-              >
-              <div class="dropdown">
-                <a
-                  href="#by-industry"
-                  class="dropdown-item"
-                  onclick="showPage('cases-page'); return false;"
-                  ><span>By Industry</span></a
-                >
-                <a
-                  href="#by-tech"
-                  class="dropdown-item"
-                  onclick="showPage('cases-page'); return false;"
-                  ><span>By Technology</span></a
-                >
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                href="#insights"
-                class="nav-link"
-                onclick="showPage('insights-page'); return false;"
-                >Insights</a
-              >
-              <div class="dropdown">
-                <a
-                  href="#blogs"
-                  class="dropdown-item"
-                  onclick="showPage('insights-page'); return false;"
-                  ><span>Blogs</span></a
-                >
-                <a
-                  href="#whitepapers"
-                  class="dropdown-item"
-                  onclick="showPage('insights-page'); return false;"
-                  ><span>Whitepapers</span></a
-                >
-                <a
-                  href="#news"
-                  class="dropdown-item"
-                  onclick="showPage('insights-page'); return false;"
-                  ><span>News &amp; Press Releases</span></a
-                >
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                href="#careers"
-                class="nav-link"
-                onclick="showPage('careers-page'); return false;"
-                >Careers</a
-              >
-              <div class="dropdown">
-                <a
-                  href="#jobs"
-                  class="dropdown-item"
-                  onclick="showPage('careers-page'); return false;"
-                  ><span>Job Openings</span></a
-                >
-                <a
-                  href="#life"
-                  class="dropdown-item"
-                  onclick="showPage('life-page'); return false;"
-                  ><span>Life @ IAST</span></a
-                >
-                <a
-                  href="#testimonials"
-                  class="dropdown-item"
-                  onclick="showPage('life-page'); scrollToSection('testimonials'); return false;"
-                  ><span>What Our Employees Say</span></a
-                >
-                <a
-                  href="#internships"
-                  class="dropdown-item"
-                  onclick="showPage('careers-page'); return false;"
-                  ><span>Internships</span></a
-                >
-              </div>
-            </li>
-            <li class="nav-item">
-              <a
-                href="#contact"
-                class="nav-link"
-                onclick="showPage('contact-page'); return false;"
-                >Contact</a
-              >
-              <div class="dropdown">
-                <a
-                  href="#contact-form"
-                  class="dropdown-item"
-                  onclick="showPage('contact-page'); return false;"
-                  ><span>Contact Form</span></a
-                >
-                <a
-                  href="#location"
-                  class="dropdown-item"
-                  onclick="showPage('contact-page'); return false;"
-                  ><span>Address + Map</span></a
-                >
-                <a
-                  href="#phone"
-                  class="dropdown-item"
-                  onclick="showPage('contact-page'); return false;"
-                  ><span>Phone &amp; Emails</span></a
-                >
-              </div>
-            </li>
-          </ul>
-          <div class="cta-buttons">
-            <a href="#ctv" class="btn btn-secondary" id="secondary-cta">
-              <span>CTV – Training &amp; Workshops</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </nav>
+
+    <!-- NAVBAR: injected from navbar.html by js/include-navbar.js -->
+    <div id="navbar-root"></div>
+
     <!-- Floating Sticky CTA Button -->
-    <a href="#contact-form" class="floating-cta" id="floating-cta">
+    <a href="contact.html#contact-form" class="floating-cta" id="floating-cta">
       Request Proposal
     </a>
+
     <main class="demo-content" id="main-content">
       <!-- Home Page -->
+
+
+
+      <div class="branding d-flex align-items-center">
+      <div
+        class="container position-relative d-flex align-items-center justify-content-between"
+      >
+        <nav id="navmenu" class="navmenu">
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </div>
+
+      <!-- Hero Section -->
+      <section id="hero" class="hero section dark-background">
+        <div
+          id="hero-carousel"
+          class="carousel slide carousel-fade"
+          data-bs-ride="carousel"
+          data-bs-interval="5000">
+          <div class="carousel-item active">
+            <img src="assets/img/hero-carousel/hero-carousel-1.jpg" alt="" />
+            <div class="carousel-container">
+              <h2><span>Delicious</span> Restaurant</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat.
+              </p>
+              <div>
+                <a href="#menu" class="btn-get-started">Our Menu</a>
+                <a href="#book-a-table" class="btn-get-started">Book a table</a>
+              </div>
+            </div>
+          </div>
+          <!-- End Carousel Item -->
+
+          <div class="carousel-item">
+            <img src="assets/img/hero-carousel/hero-carousel-2.jpg" alt="" />
+            <div class="carousel-container">
+              <h2>At vero eos et accusamus</h2>
+              <p>
+                Nam libero tempore, cum soluta nobis est eligendi optio cumque
+                nihil impedit quo minus id quod maxime placeat facere possimus,
+                omnis voluptas assumenda est, omnis dolor repellendus.
+                Temporibus autem quibusdam et aut officiis debitis aut.
+              </p>
+              <div>
+                <a href="#menu" class="btn-get-started">Our Menu</a>
+                <a href="#book-a-table" class="btn-get-started">Book a table</a>
+              </div>
+            </div>
+          </div>
+          <!-- End Carousel Item -->
+
+          <div class="carousel-item">
+            <img src="assets/img/hero-carousel/hero-carousel-3.jpg" alt="" />
+            <div class="carousel-container">
+              <h2>Temporibus autem quibusdam</h2>
+              <p>
+                Beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem
+                quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                consequuntur magni dolores eos qui ratione voluptatem sequi
+                nesciunt omnis iste natus error sit voluptatem accusantium.
+              </p>
+              <div>
+                <a href="#menu" class="btn-get-started">Our Menu</a>
+                <a href="#book-a-table" class="btn-get-started">Book a table</a>
+              </div>
+            </div>
+          </div>
+          <!-- End Carousel Item -->
+
+          <a
+            class="carousel-control-prev"
+            href="#hero-carousel"
+            role="button"
+            data-bs-slide="prev"
+          >
+            <span
+              class="carousel-control-prev-icon bi bi-chevron-left"
+              aria-hidden="true"
+            ></span>
+          </a>
+
+          <a
+            class="carousel-control-next"
+            href="#hero-carousel"
+            role="button"
+            data-bs-slide="next"
+          >
+            <span
+              class="carousel-control-next-icon bi bi-chevron-right"
+              aria-hidden="true"
+            ></span>
+          </a>
+
+          <ol class="carousel-indicators"></ol>
+        </div>
+      </section>
+
+
+
       <div class="page-content" id="home-page">
-        <!-- Hero Carousel Section -->
-        <div class="hero-carousel-container">
-          <div class="hero-carousel-wrapper">
-            <div class="hero-carousel-track" id="heroCarousel">
-              <div class="hero-slide hero-slide-active">
-                <div class="hero-slide-content">
-                  <h1 class="hero-slide-title">Welcome to IAST</h1>
-                  <p class="hero-slide-subtitle">
-                    Innovation in Automotive, Software and Technology
-                  </p>
-                </div>
-              </div>
-              <div class="hero-slide">
-                <div class="hero-slide-content">
-                  <h1 class="hero-slide-title">
-                    Certified and Trusted by Industry Leaders
-                  </h1>
-                  <p class="hero-slide-subtitle">
-                    Delivering Excellence Across Global Markets
-                  </p>
-                </div>
-              </div>
-              <div class="hero-slide">
-                <div class="hero-slide-content">
-                  <h1 class="hero-slide-title">Engineering Excellence</h1>
-                  <p class="hero-slide-subtitle">
-                    End-to-End Product Development | R&amp;D Services
-                  </p>
-                </div>
+
+
+        
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    <!-- Stats Section -->
+    <section id="stats" class="stats section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item d-flex align-items-center w-100 h-100">
+              <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Happy Clients</p>
               </div>
             </div>
-            <div class="hero-carousel-dots" id="heroCarouselDots">
-              <span
-                class="hero-dot hero-dot-active"
-                onclick="goToHeroSlide(0)"
-              ></span>
-              <span class="hero-dot" onclick="goToHeroSlide(1)"></span>
-              <span class="hero-dot" onclick="goToHeroSlide(2)"></span>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item d-flex align-items-center w-100 h-100">
+              <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Projects</p>
+              </div>
             </div>
-          </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item d-flex align-items-center w-100 h-100">
+              <i class="bi bi-headset color-green flex-shrink-0"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Hours Of Support</p>
+              </div>
+            </div>
+          </div><!-- End Stats Item -->
+
+          <div class="col-lg-3 col-md-6">
+            <div class="stats-item d-flex align-items-center w-100 h-100">
+              <i class="bi bi-people color-pink flex-shrink-0"></i>
+              <div>
+                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
+                <p>Hard Workers</p>
+              </div>
+            </div>
+          </div><!-- End Stats Item -->
+
         </div>
-        <!-- Welcome Section -->
-        <div class="welcome-section">
-          <h1>Welcome to IAST</h1>
-          <p class="hero-subtitle">
-            Innovation in Automotive, Software &amp; Technology
-          </p>
-          <p class="hero-description">
-            We are a leading technology solutions provider specializing in
-            embedded systems, automotive software, AI/ML, and digital
-            transformation services.
-          </p>
-          <div class="hero-stats">
-            <div class="hero-stat-item">
-              <div class="hero-stat-number">500+</div>
-              <div class="hero-stat-label">Expert Engineers</div>
-            </div>
-            <div class="hero-stat-item">
-              <div class="hero-stat-number">200+</div>
-              <div class="hero-stat-label">Projects Delivered</div>
-            </div>
-            <div class="hero-stat-item">
-              <div class="hero-stat-number">15+</div>
-              <div class="hero-stat-label">Years Experience</div>
-            </div>
-            <div class="hero-stat-item">
-              <div class="hero-stat-number">50+</div>
-              <div class="hero-stat-label">Global Clients</div>
-            </div>
-          </div>
-        </div>
+
+      </div>
+
+    </section><!-- /Stats Section -->
+
+
         <!-- About Us Preview -->
-        <div class="content-section about-preview">
-          <div class="section-header-centered">
-            <h2>About Us</h2>
-            <div class="section-underline"></div>
-          </div>
-          <div class="about-content-wrapper">
-            <div class="about-text-content">
-              <p class="about-lead">
-                IAST was founded with a vision to revolutionize the automotive
-                and embedded systems industry.
-              </p>
-              <p>
-                Over the years, we've grown into a trusted technology partner
-                for leading companies worldwide, delivering innovative solutions
-                that drive digital transformation and sustainable growth.
-              </p>
-              <p>
-                With 500+ expert engineers and 15+ years of experience, we've
-                successfully delivered 200+ projects across automotive,
-                aerospace, and industrial sectors.
-              </p>
-              <button class="cta-btn-large" onclick="showPage('about-page')">
-                Know More About Us →
-              </button>
-            </div>
-            <div class="about-visual">
-              <div class="visual-card">
-                <div class="visual-icon">🎯</div>
-                <h4>Our Mission</h4>
-                <p>
-                  Empowering businesses with innovative technology solutions
-                </p>
+
+            <!-- Services Section -->
+    <section id="services" class="services section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span class="subtitle">Services</span>
+        <h2>Our Services</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="services-showcase mt-5">
+          <div class="row g-0">
+            <div class="col-lg-6">
+              <div class="featured-service" data-aos="fade-right" data-aos-delay="200">
+                <div class="service-image">
+                  <img src="assets/img/services/services-3.webp" alt="Featured Service" class="img-fluid">
+                </div>
+                <div class="service-overlay">
+                  <div class="overlay-content">
+                    <h3>Digital Transformation</h3>
+                    <p>Revolutionizing businesses through cutting-edge technology solutions and strategic digital initiatives.</p>
+                    <a href="service-details.html" class="service-link">
+                      <span>Discover More</span>
+                      <i class="bi bi-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
               </div>
-              <div class="visual-card">
-                <div class="visual-icon">🌟</div>
-                <h4>Our Vision</h4>
-                <p>Leading the future of automotive and embedded systems</p>
+            </div>
+            <div class="col-lg-6">
+              <div class="services-list">
+
+                <div class="service-item" data-aos="fade-left" data-aos-delay="100">
+                  <div class="service-icon">
+                    <i class="bi bi-palette"></i>
+                  </div>
+                  <div class="service-content">
+                    <h4><a href="service-details.html">Brand Strategy</a></h4>
+                    <p>Crafting compelling brand narratives that resonate with your target audience and establish market leadership.</p>
+                  </div>
+                </div>
+
+                <div class="service-item" data-aos="fade-left" data-aos-delay="200">
+                  <div class="service-icon">
+                    <i class="bi bi-code-slash"></i>
+                  </div>
+                  <div class="service-content">
+                    <h4><a href="service-details.html">Technical Development</a></h4>
+                    <p>Building scalable solutions with modern technologies that drive efficiency and enhance user experiences.</p>
+                  </div>
+                </div>
+
+                <div class="service-item" data-aos="fade-left" data-aos-delay="300">
+                  <div class="service-icon">
+                    <i class="bi bi-graph-up-arrow"></i>
+                  </div>
+                  <div class="service-content">
+                    <h4><a href="service-details.html">Growth Analytics</a></h4>
+                    <p>Leveraging data-driven insights to optimize performance and accelerate sustainable business growth.</p>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
-        <!-- Consulting Services Carousel -->
-        <div class="content-section services-section">
-          <div class="section-header-centered">
-            <h2>Our Consulting Services</h2>
-            <div class="section-underline"></div>
-            <p class="section-subtitle">
-              Comprehensive technology solutions tailored to your needs
+
+        <div class="additional-services mt-5">
+          <div class="row g-5">
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+              <div class="service-card">
+                <div class="card-image">
+                  <img src="assets/img/services/services-7.webp" alt="Consulting Services" class="img-fluid">
+                </div>
+                <div class="card-body">
+                  <h5><a href="service-details.html">Strategic Consulting</a></h5>
+                  <p>Expert guidance to navigate complex business challenges and identify new opportunities for sustainable growth and market expansion.</p>
+                  <a href="service-details.html" class="read-more">
+                    Learn More <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="service-card">
+                <div class="card-image">
+                  <img src="assets/img/services/services-9.webp" alt="Digital Marketing" class="img-fluid">
+                </div>
+                <div class="card-body">
+                  <h5><a href="service-details.html">Digital Marketing</a></h5>
+                  <p>Comprehensive marketing strategies that amplify your online presence and drive meaningful engagement across all digital channels.</p>
+                  <a href="service-details.html" class="read-more">
+                    Learn More <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+              <div class="service-card">
+                <div class="card-image">
+                  <img src="assets/img/services/services-11.webp" alt="Innovation Labs" class="img-fluid">
+                </div>
+                <div class="card-body">
+                  <h5><a href="service-details.html">Innovation Labs</a></h5>
+                  <p>Experimental environments where breakthrough ideas come to life through rapid prototyping and collaborative innovation processes.</p>
+                  <a href="service-details.html" class="read-more">
+                    Learn More <i class="bi bi-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Services Section -->
+
+
+
+        <!-- Features Section -->
+        <section id="features" class="features section">
+          <!-- Section Title -->
+          <div class="container section-title" data-aos="fade-up">
+            <span class="subtitle">Features</span>
+            <h2>Great Features</h2>
+            <p>
+              Necessitatibus eius consequatur ex aliquid fuga eum quidem sint
+              consectetur velit
             </p>
           </div>
-          <div class="carousel-container">
-            <button class="carousel-btn prev" onclick="moveCarousel(-1)">
-              ❮
-            </button>
-            <div class="carousel-wrapper">
-              <div class="carousel-track" id="servicesCarousel">
-                <div
-                  class="carousel-card clickable-service-card"
-                  onclick="showPage('services-page')"
-                >
-                  <div class="service-icon">⚙️</div>
-                  <h3>Embedded Software</h3>
-                  <p>
-                    Custom embedded solutions for automotive and industrial
-                    applications
-                  </p>
-                  <div class="card-click-hint">Click to explore →</div>
+          <!-- End Section Title -->
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="tabs-wrapper">
+              <div class="tabs-header" data-aos="fade-up" data-aos-delay="200">
+                <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                    <a
+                      class="nav-link active show"
+                      data-bs-toggle="tab"
+                      data-bs-target="#features-tab-1"
+                    >
+                      <div class="tab-content-preview">
+                        <span class="tab-number">01</span>
+                        <div class="tab-text">
+                          <h6>Innovation</h6>
+                          <small>Creative solutions</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#features-tab-2"
+                    >
+                      <div class="tab-content-preview">
+                        <span class="tab-number">02</span>
+                        <div class="tab-text">
+                          <h6>Strategy</h6>
+                          <small>Business growth</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#features-tab-3"
+                    >
+                      <div class="tab-content-preview">
+                        <span class="tab-number">03</span>
+                        <div class="tab-text">
+                          <h6>Performance</h6>
+                          <small>Optimal results</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      data-bs-toggle="tab"
+                      data-bs-target="#features-tab-4"
+                    >
+                      <div class="tab-content-preview">
+                        <span class="tab-number">04</span>
+                        <div class="tab-text">
+                          <h6>Integration</h6>
+                          <small>Seamless workflow</small>
+                        </div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+                <div class="tab-pane fade active show" id="features-tab-1">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <div class="content-area">
+                        <div class="content-badge">
+                          <i class="bi bi-lightbulb"></i>
+                          <span>Innovation Hub</span>
+                        </div>
+                        <h3>Revolutionary Design Thinking</h3>
+                        <p>
+                          Sed ut perspiciatis unde omnis natus error sit
+                          voluptatem accusantium doloremque laudantium, totam
+                          rem aperiam eaque ipsa quae ab illo inventore
+                          veritatis et quasi architecto beatae vitae dicta sunt
+                          explicabo.
+                        </p>
+
+                        <div class="highlight-stats">
+                          <div class="stat-item">
+                            <span class="stat-value">145%</span>
+                            <span class="stat-label">Innovation Rate</span>
+                          </div>
+                          <div class="stat-item">
+                            <span class="stat-value">28K</span>
+                            <span class="stat-label">Ideas Generated</span>
+                          </div>
+                        </div>
+
+                        <div class="feature-points">
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Nemo enim ipsam voluptatem quia voluptas
+                              sit</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Aspernatur aut odit fugit sed quia
+                              consequuntur</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Magni dolores eos qui ratione voluptatem</span
+                            >
+                          </div>
+                        </div>
+
+                        <a href="#" class="explore-link">
+                          Explore Innovation
+                          <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="visual-content">
+                        <img
+                          src="assets/img/features/features-2.webp"
+                          alt=""
+                          class="img-fluid"
+                        />
+                        <div class="floating-element">
+                          <div class="floating-card">
+                            <i class="bi bi-lightning-charge"></i>
+                            <div class="card-info">
+                              <span>Speed</span>
+                              <strong>3x Faster</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="carousel-card clickable-service-card"
-                  onclick="showPage('services-page')"
-                >
-                  <div class="service-icon">🚗</div>
-                  <h3>Automotive &amp; AUTOSAR</h3>
-                  <p>
-                    Complete AUTOSAR implementation and automotive software
-                    architecture
-                  </p>
-                  <div class="card-click-hint">Click to explore →</div>
+
+                <div class="tab-pane fade" id="features-tab-2">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <div class="content-area">
+                        <div class="content-badge">
+                          <i class="bi bi-compass"></i>
+                          <span>Strategic Planning</span>
+                        </div>
+                        <h3>Data-Driven Business Strategy</h3>
+                        <p>
+                          At vero eos et accusamus et iusto odio dignissimos
+                          ducimus qui blanditiis praesentium voluptatum deleniti
+                          atque corrupti quos dolores et quas molestias
+                          excepturi sint occaecati cupiditate non provident.
+                        </p>
+
+                        <div class="highlight-stats">
+                          <div class="stat-item">
+                            <span class="stat-value">234%</span>
+                            <span class="stat-label">Growth Rate</span>
+                          </div>
+                          <div class="stat-item">
+                            <span class="stat-value">156</span>
+                            <span class="stat-label">Strategies</span>
+                          </div>
+                        </div>
+
+                        <div class="feature-points">
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Similique sunt in culpa qui officia
+                              deserunt</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Mollitia animi id est laborum et dolorum
+                              fuga</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Et harum quidem rerum facilis est expedita</span
+                            >
+                          </div>
+                        </div>
+
+                        <a href="#" class="explore-link">
+                          View Strategy <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="visual-content">
+                        <img
+                          src="assets/img/features/features-4.webp"
+                          alt=""
+                          class="img-fluid"
+                        />
+                        <div class="floating-element">
+                          <div class="floating-card">
+                            <i class="bi bi-graph-up-arrow"></i>
+                            <div class="card-info">
+                              <span>Growth</span>
+                              <strong>+189% ROI</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="carousel-card clickable-service-card"
-                  onclick="showPage('services-page')"
-                >
-                  <div class="service-icon">🤖</div>
-                  <h3>AI/ML Solutions</h3>
-                  <p>
-                    Advanced AI, computer vision, and intelligent automation
-                    systems
-                  </p>
-                  <div class="card-click-hint">Click to explore →</div>
+
+                <div class="tab-pane fade" id="features-tab-3">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <div class="content-area">
+                        <div class="content-badge">
+                          <i class="bi bi-speedometer2"></i>
+                          <span>High Performance</span>
+                        </div>
+                        <h3>Optimized System Performance</h3>
+                        <p>
+                          Temporibus autem quibusdam et aut officiis debitis aut
+                          rerum necessitatibus saepe eveniet voluptates
+                          repudiandae sint et molestiae non recusandae itaque
+                          earum rerum hic tenetur sapiente delectus.
+                        </p>
+
+                        <div class="highlight-stats">
+                          <div class="stat-item">
+                            <span class="stat-value">99.8%</span>
+                            <span class="stat-label">System Uptime</span>
+                          </div>
+                          <div class="stat-item">
+                            <span class="stat-value">2.4s</span>
+                            <span class="stat-label">Load Time</span>
+                          </div>
+                        </div>
+
+                        <div class="feature-points">
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Ut aut reiciendis voluptatibus maiores
+                              alias</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Consequatur aut perferendis doloribus
+                              asperiores</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Repellat nam libero tempore cum soluta
+                              nobis</span
+                            >
+                          </div>
+                        </div>
+
+                        <a href="#" class="explore-link">
+                          Check Performance <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="visual-content">
+                        <img
+                          src="assets/img/features/features-1.webp"
+                          alt=""
+                          class="img-fluid"
+                        />
+                        <div class="floating-element">
+                          <div class="floating-card">
+                            <i class="bi bi-cpu"></i>
+                            <div class="card-info">
+                              <span>Power</span>
+                              <strong>128 Cores</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div
-                  class="carousel-card clickable-service-card"
-                  onclick="showPage('services-page')"
-                >
-                  <div class="service-icon">☁️</div>
-                  <h3>IoT &amp; Cloud</h3>
-                  <p>
-                    Connected device solutions with cloud integration and
-                    analytics
-                  </p>
-                  <div class="card-click-hint">Click to explore →</div>
-                </div>
-                <div
-                  class="carousel-card clickable-service-card"
-                  onclick="showPage('services-page')"
-                >
-                  <div class="service-icon">🏭</div>
-                  <h3>Industry 4.0</h3>
-                  <p>
-                    Smart manufacturing and digital transformation solutions
-                  </p>
-                  <div class="card-click-hint">Click to explore →</div>
-                </div>
-                <div
-                  class="carousel-card clickable-service-card"
-                  onclick="showPage('services-page')"
-                >
-                  <div class="service-icon">🔧</div>
-                  <h3>Product Engineering</h3>
-                  <p>
-                    End-to-end product development from concept to manufacturing
-                  </p>
-                  <div class="card-click-hint">Click to explore →</div>
+
+                <div class="tab-pane fade" id="features-tab-4">
+                  <div class="row align-items-center">
+                    <div class="col-lg-6">
+                      <div class="content-area">
+                        <div class="content-badge">
+                          <i class="bi bi-puzzle"></i>
+                          <span>Smart Integration</span>
+                        </div>
+                        <h3>Seamless Workflow Integration</h3>
+                        <p>
+                          Eligendi optio cumque nihil impedit quo minus id quod
+                          maxime placeat facere possimus omnis voluptas
+                          assumenda est omnis dolor repellendus temporibus autem
+                          quibusdam et aut officiis debitis.
+                        </p>
+
+                        <div class="highlight-stats">
+                          <div class="stat-item">
+                            <span class="stat-value">450+</span>
+                            <span class="stat-label">Integrations</span>
+                          </div>
+                          <div class="stat-item">
+                            <span class="stat-value">85%</span>
+                            <span class="stat-label">Automation</span>
+                          </div>
+                        </div>
+
+                        <div class="feature-points">
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Rerum necessitatibus saepe eveniet
+                              voluptates</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span
+                              >Repudiandae sint et molestiae non
+                              recusandae</span
+                            >
+                          </div>
+                          <div class="point-item">
+                            <i class="bi bi-arrow-right"></i>
+                            <span>Itaque earum rerum hic tenetur sapiente</span>
+                          </div>
+                        </div>
+
+                        <a href="#" class="explore-link">
+                          Start Integration <i class="bi bi-arrow-up-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="visual-content">
+                        <img
+                          src="assets/img/features/features-5.webp"
+                          alt=""
+                          class="img-fluid"
+                        />
+                        <div class="floating-element">
+                          <div class="floating-card">
+                            <i class="bi bi-link-45deg"></i>
+                            <div class="card-info">
+                              <span>Connected</span>
+                              <strong>24/7 Sync</strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-            <button class="carousel-btn next" onclick="moveCarousel(1)">
-              ❯
-            </button>
           </div>
-        </div>
+        </section>
+        <!-- /Features Section -->
+
+        <!-- Features Cards Section -->
+        <section id="features-cards" class="features-cards section">
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row g-4">
+              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="150">
+                <div class="feature-card">
+                  <div class="feature-icon">
+                    <i class="bi bi-app-indicator"></i>
+                  </div>
+                  <h3>Intuitive Dashboard Interface</h3>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua ut enim ad minim veniam.
+                  </p>
+                  <ul class="feature-benefits">
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Real-time data
+                      visualization
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Customizable
+                      widgets
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Interactive
+                      reports
+                    </li>
+                  </ul>
+                  <div class="feature-image">
+                    <img
+                      src="assets/img/features/features-1.webp"
+                      alt="Dashboard Interface"
+                      class="img-fluid"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card highlighted">
+                  <div class="feature-icon">
+                    <i class="bi bi-graph-up-arrow"></i>
+                  </div>
+                  <h3>Advanced Analytics Tools</h3>
+                  <p>
+                    Mauris blandit aliquet elit eget tincidunt nibh pulvinar a
+                    cras ultricies ligula sed magna dictum porta mauris blandit
+                    aliquet elit eget tincidunt.
+                  </p>
+                  <ul class="feature-benefits">
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Predictive
+                      analysis
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Custom reporting
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Data exploration
+                    </li>
+                  </ul>
+                  <div class="feature-image">
+                    <img
+                      src="assets/img/features/features-2.webp"
+                      alt="Analytics Tools"
+                      class="img-fluid"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4" data-aos="fade-up" data-aos-delay="250">
+                <div class="feature-card">
+                  <div class="feature-icon">
+                    <i class="bi bi-shield-check"></i>
+                  </div>
+                  <h3>Enterprise-Grade Security</h3>
+                  <p>
+                    Nulla porttitor accumsan tincidunt praesent sapien massa
+                    convallis a pellentesque nec egestas non nisi proin eget
+                    tortor risus donec sollicitudin.
+                  </p>
+                  <ul class="feature-benefits">
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> End-to-end
+                      encryption
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Advanced access
+                      control
+                    </li>
+                    <li>
+                      <i class="bi bi-check-circle-fill"></i> Compliance
+                      monitoring
+                    </li>
+                  </ul>
+                  <div class="feature-image">
+                    <img
+                      src="assets/img/features/features-3.webp"
+                      alt="Security Features"
+                      class="img-fluid"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- /Features Cards Section -->
+
+
         <!-- Why Choose Us -->
-        <div class="content-section why-choose-section">
-          <div class="section-header-centered">
-            <h2>Why Choose Us</h2>
-            <div class="section-underline"></div>
-            <p class="section-subtitle">
-              Six reasons why global companies trust IAST
-            </p>
+
+         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+    <!-- Why Us Section -->
+     
+    <section id="why-us" class="why-us section light-background">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Why Us</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit</p>
+      </div><!-- End Section Title -->
+
+      <div class="container">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+            <div class="card-item">
+              <span>01</span>
+              <h4><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+              <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
+            </div>
+          </div><!-- Card Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+            <div class="card-item">
+              <span>02</span>
+              <h4><a href="" class="stretched-link">Repellat Nihil</a></h4>
+              <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
+            </div>
+          </div><!-- Card Item -->
+
+          <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
+            <div class="card-item">
+              <span>03</span>
+              <h4><a href="" class="stretched-link">Ad ad velit qui</a></h4>
+              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+            </div>
+          </div><!-- Card Item -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Why Us Section -->
+
+
+           <!-- Team Section -->
+    <section id="team" class="team section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span class="subtitle">Team</span>
+        <h2>Our Team</h2>
+        <p>Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium totam rem aperiam</p>
+      </div><!-- End Section Title -->
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row g-4 align-items-stretch">
+
+          <div class="col-md-6 col-lg-3">
+            <article class="member-card h-100" data-aos="zoom-in" data-aos-delay="150">
+              <figure class="member-media">
+                <img src="assets/img/person/person-f-9.webp" class="img-fluid" alt="Team member portrait">
+                <ul class="social-list">
+                  <li><a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a></li>
+                  <li><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+                  <li><a href="#" aria-label="Github"><i class="bi bi-github"></i></a></li>
+                </ul>
+              </figure>
+              <div class="member-content">
+                <h3 class="member-name">Ava Thompson</h3>
+                <p class="member-role">Product Strategist</p>
+                <p class="member-bio">Consequatur illum numquam doloremque, sed vitae ipsa dolores. Aspernatur dicta facilis incidunt.</p>
+              </div>
+            </article><!-- End Team Member -->
           </div>
-          <div class="why-choose-grid">
-            <div class="why-card">
-              <div class="why-icon">🏆</div>
-              <h3>Proven Expertise</h3>
-              <p>
-                15+ years of experience delivering cutting-edge technology
-                solutions across multiple industries
-              </p>
+
+          <div class="col-md-6 col-lg-3">
+            <article class="member-card h-100" data-aos="zoom-in" data-aos-delay="200">
+              <figure class="member-media">
+                <img src="assets/img/person/person-m-7.webp" class="img-fluid" alt="Team member portrait">
+                <ul class="social-list">
+                  <li><a href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a></li>
+                  <li><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+                  <li><a href="#" aria-label="Dribbble"><i class="bi bi-dribbble"></i></a></li>
+                </ul>
+              </figure>
+              <div class="member-content">
+                <h3 class="member-name">Logan Rivera</h3>
+                <p class="member-role">Lead UX Designer</p>
+                <p class="member-bio">Voluptatem repellat omnis, harum veritatis amet. Ullam fugiat beatae quam, nihil officiis.</p>
+              </div>
+            </article><!-- End Team Member -->
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <article class="member-card h-100" data-aos="zoom-in" data-aos-delay="250">
+              <figure class="member-media">
+                <img src="assets/img/person/person-f-12.webp" class="img-fluid" alt="Team member portrait">
+                <ul class="social-list">
+                  <li><a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></li>
+                  <li><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+                  <li><a href="#" aria-label="Behance"><i class="bi bi-behance"></i></a></li>
+                </ul>
+              </figure>
+              <div class="member-content">
+                <h3 class="member-name">Mia Patel</h3>
+                <p class="member-role">Engineering Manager</p>
+                <p class="member-bio">Accusantium quasi obcaecati, ipsum libero minima rem. Dignissimos, asperiores. Nisi, distinctio.</p>
+              </div>
+            </article><!-- End Team Member -->
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <article class="member-card h-100" data-aos="zoom-in" data-aos-delay="300">
+              <figure class="member-media">
+                <img src="assets/img/person/person-m-11.webp" class="img-fluid" alt="Team member portrait">
+                <ul class="social-list">
+                  <li><a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a></li>
+                  <li><a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+                  <li><a href="#" aria-label="Github"><i class="bi bi-github"></i></a></li>
+                </ul>
+              </figure>
+              <div class="member-content">
+                <h3 class="member-name">Ethan Brooks</h3>
+                <p class="member-role">Full‑Stack Developer</p>
+                <p class="member-bio">Quidem blanditiis recusandae laborum, at molestias id aliquam. Cumque, architecto dolorum.</p>
+              </div>
+            </article><!-- End Team Member -->
+          </div>
+
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-lg-8">
+            <div class="team-highlight d-flex align-items-center" data-aos="fade-right" data-aos-delay="200">
+              <div class="icon-wrap">
+                <i class="bi bi-people"></i>
+              </div>
+              <div class="copy">
+                <h4 class="title">Collaborative crew, measurable impact</h4>
+                <p class="desc mb-0">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo.</p>
+              </div>
             </div>
-            <div class="why-card">
-              <div class="why-icon">👥</div>
-              <h3>Talented Team</h3>
-              <p>
-                500+ skilled engineers with deep domain expertise in automotive
-                and embedded systems
-              </p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">🎯</div>
-              <h3>Quality Focused</h3>
-              <p>
-                Rigorous quality processes ensuring reliable, high-performance
-                solutions every time
-              </p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">🚀</div>
-              <h3>Innovation Driven</h3>
-              <p>
-                Continuous investment in R&amp;D and emerging technologies to
-                stay ahead of the curve
-              </p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">🤝</div>
-              <h3>Customer-Centric</h3>
-              <p>
-                Long-term partnerships built on trust, transparency, and
-                exceptional service
-              </p>
-            </div>
-            <div class="why-card">
-              <div class="why-icon">⚡</div>
-              <h3>Agile Delivery</h3>
-              <p>
-                Fast turnaround times with flexible, scalable solutions tailored
-                to your needs
-              </p>
-            </div>
+          </div>
+
+          <div class="col-lg-4 d-flex align-items-stretch">
+            <aside class="join-card w-100" data-aos="fade-left" data-aos-delay="250">
+              <div class="join-content">
+                <h5 class="mb-2">Want to work with us?</h5>
+                <p class="mb-3">Doloribus modi cum repellat. Veniam numquam dicta, laudantium a deleniti sapiente.</p>
+                <a href="#" class="btn btn-join">
+                  <i class="bi bi-send me-1"></i>
+                  Open Positions
+                </a>
+              </div>
+            </aside>
           </div>
         </div>
+
+      </div>
+
+    </section><!-- /Team Section -->
+
         <!-- Our Partners -->
-        <div class="content-section partners-section">
-          <div class="section-header-centered">
-            <h2>Our Partners</h2>
-            <div class="section-underline"></div>
+           <section id="team" class="team section">
+
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <span class="subtitle">Partners</span>
+        <h2>Our Partners</h2>
             <p class="section-subtitle">
               Trusted by leading organizations worldwide
             </p>
-          </div>
-          <div class="partners-carousel-container">
-            <div class="partners-carousel-wrapper">
+            
               <div class="partners-carousel-track" id="partnersCarousel">
                 <div class="partner-logo">🏢 Partner A</div>
                 <div class="partner-logo">🏭 Partner B</div>
@@ -2841,1301 +1041,37 @@
                 <div class="partner-logo">✈️ Partner D</div>
                 <div class="partner-logo">🔬 Partner E</div>
                 <div class="partner-logo">💻 Partner F</div>
-                <div class="partner-logo">��� Partner G</div>
+                <div class="partner-logo">🌐 Partner G</div>
                 <div class="partner-logo">⚙️ Partner H</div>
                 <!-- Duplicate for seamless loop -->
                 <div class="partner-logo">🏢 Partner A</div>
                 <div class="partner-logo">🏭 Partner B</div>
                 <div class="partner-logo">🚗 Partner C</div>
-                <div class="partner-logo">✈️ Partner D</div>
+                <div class="partner-logo">�����️ Partner D</div>
               </div>
-            </div>
+</div>
           </div>
-        </div>
-      </div>
-      <!-- About Us Page -->
-      <div class="page-content" id="about-page" style="display: none">
-        <h1>About IAST</h1>
-        <p class="hero-subtitle">Driving Innovation Since 2010</p>
-        <div class="content-section">
-          <h2>Our Story</h2>
-          <p>
-            IAST was founded with a vision to revolutionize the automotive and
-            embedded systems industry. Over the years, we've grown into a
-            trusted technology partner for leading companies worldwide.
-          </p>
-        </div>
-        <div class="stats-grid">
-          <div class="stat-card">
-            <div class="stat-number">500+</div>
-            <div class="stat-label">Expert Engineers</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">200+</div>
-            <div class="stat-label">Projects Delivered</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">15+</div>
-            <div class="stat-label">Years Experience</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-number">50+</div>
-            <div class="stat-label">Global Clients</div>
-          </div>
-        </div>
-        <div class="content-section">
-          <h2>Our Mission</h2>
-          <p>
-            To empower businesses with innovative technology solutions that
-            drive digital transformation and sustainable growth.
-          </p>
-        </div>
-        <div class="content-section">
-          <h2>Our Values</h2>
-          <div class="values-grid">
-            <div class="value-item">
-              <h3>🎯 Excellence</h3>
-              <p>We strive for perfection in every project we undertake.</p>
-            </div>
-            <div class="value-item">
-              <h3>🤝 Integrity</h3>
-              <p>
-                Trust and transparency guide all our business relationships.
-              </p>
-            </div>
-            <div class="value-item">
-              <h3>���� Innovation</h3>
-              <p>
-                We continuously push boundaries to create cutting-edge
-                solutions.
-              </p>
-            </div>
-            <div class="value-item">
-              <h3>🌱 Growth</h3>
-              <p>We invest in our people and foster a culture of learning.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Services Page -->
-      <div class="page-content" id="services-page" style="display: none">
-        <h1>Our Services</h1>
-        <p class="hero-subtitle">Comprehensive Technology Solutions</p>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon">⚙️</div>
-            <h3>Embedded Software Development</h3>
-            <p>
-              Custom embedded solutions for automotive, industrial, and consumer
-              electronics with real-time operating systems and bare-metal
-              programming.
-            </p>
-            <ul class="service-features">
-              <li>RTOS Development</li>
-              <li>Device Drivers</li>
-              <li>Firmware Engineering</li>
-              <li>Low-level Programming</li>
-            </ul>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🚗</div>
-            <h3>Automotive &amp; AUTOSAR Solutions</h3>
-            <p>
-              Complete AUTOSAR stack implementation, BSW development, and
-              automotive software architecture design.
-            </p>
-            <ul class="service-features">
-              <li>AUTOSAR Classic &amp; Adaptive</li>
-              <li>BSW Configuration</li>
-              <li>Diagnostics (UDS)</li>
-              <li>Vehicle Networking</li>
-            </ul>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🔧</div>
-            <h3>Product Engineering</h3>
-            <p>
-              End-to-end product development from concept to manufacturing,
-              including hardware-software integration.
-            </p>
-            <ul class="service-features">
-              <li>Concept to Production</li>
-              <li>Prototyping</li>
-              <li>Testing &amp; Validation</li>
-              <li>Manufacturing Support</li>
-            </ul>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🤖</div>
-            <h3>AI/ML &amp; Computer Vision</h3>
-            <p>
-              Advanced AI solutions including computer vision, deep learning,
-              and intelligent automation systems.
-            </p>
-            <ul class="service-features">
-              <li>Object Detection</li>
-              <li>Image Processing</li>
-              <li>Predictive Analytics</li>
-              <li>Neural Networks</li>
-            </ul>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">☁️</div>
-            <h3>IoT &amp; Cloud Systems</h3>
-            <p>
-              Connected device solutions with cloud integration, edge computing,
-              and real-time data analytics.
-            </p>
-            <ul class="service-features">
-              <li>IoT Platform Development</li>
-              <li>Cloud Integration</li>
-              <li>Edge Computing</li>
-              <li>Data Analytics</li>
-            </ul>
-          </div>
-          <div class="service-card">
-            <div class="service-icon">🏭</div>
-            <h3>Industry 4.0 &amp; Digital Transformation</h3>
-            <p>
-              Smart manufacturing solutions, digital twins, and industrial
-              automation for the modern factory.
-            </p>
-            <ul class="service-features">
-              <li>Smart Manufacturing</li>
-              <li>Digital Twins</li>
-              <li>Automation Solutions</li>
-              <li>Process Optimization</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <!-- Solutions/Platforms Page -->
-      <div class="page-content" id="solutions-page" style="display: none">
-        <h1>Solutions &amp; Platforms</h1>
-        <p class="hero-subtitle">Innovative Products &amp; Frameworks</p>
-        <div class="content-section">
-          <h2>R&amp;D Products</h2>
-          <div class="solutions-grid">
-            <div class="solution-card">
-              <h3>🔬 Research Platforms</h3>
-              <p>
-                Cutting-edge research and development platforms for rapid
-                prototyping and innovation.
-              </p>
-            </div>
-            <div class="solution-card">
-              <h3>🧪 Testing Frameworks</h3>
-              <p>
-                Comprehensive testing solutions for automotive and embedded
-                systems validation.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="content-section">
-          <h2>Tools &amp; Frameworks</h2>
-          <div class="solutions-grid">
-            <div class="solution-card">
-              <h3>🛠️ Development Tools</h3>
-              <p>
-                Proprietary tools for accelerated development and debugging of
-                embedded systems.
-              </p>
-            </div>
-            <div class="solution-card">
-              <h3>📊 Analytics Platform</h3>
-              <p>
-                Real-time data analytics and visualization tools for IoT and
-                industrial applications.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="content-section">
-          <h2>In-house IPs &amp; Innovation Platforms</h2>
-          <div class="solutions-grid">
-            <div class="solution-card">
-              <h3>💎 Proprietary IP Cores</h3>
-              <p>
-                Reusable intellectual property modules for accelerated product
-                development.
-              </p>
-            </div>
-            <div class="solution-card">
-              <h3>🚀 Innovation Lab</h3>
-              <p>
-                Collaborative platform for experimenting with emerging
-                technologies and concepts.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Case Studies Page -->
-      <div class="page-content" id="cases-page" style="display: none">
-        <h1>Case Studies</h1>
-        <p class="hero-subtitle">Success Stories from Our Portfolio</p>
-        <div class="case-study-section">
-          <h2>Featured Projects</h2>
-          <div class="case-card">
-            <div class="case-header">
-              <h3>🚗 Advanced Driver Assistance System (ADAS)</h3>
-              <span class="case-tag">Automotive</span>
-            </div>
-            <p>
-              Developed a complete ADAS solution for a leading automotive OEM,
-              including lane detection, collision avoidance, and adaptive cruise
-              control.
-            </p>
-            <div class="case-metrics">
-              <span>⏱️ 12 months</span> <span>👥 25 engineers</span>
-              <span>📈 40% performance improvement</span>
-            </div>
-          </div>
-          <div class="case-card">
-            <div class="case-header">
-              <h3>🏭 Smart Factory Automation</h3>
-              <span class="case-tag">Industrial</span>
-            </div>
-            <p>
-              Implemented Industry 4.0 solutions for a manufacturing plant,
-              achieving 30% efficiency gains through IoT integration and
-              predictive maintenance.
-            </p>
-            <div class="case-metrics">
-              <span>⏱️ 8 months</span> <span>👥 15 engineers</span>
-              <span>📈 30% efficiency boost</span>
-            </div>
-          </div>
-          <div class="case-card">
-            <div class="case-header">
-              <h3>🤖 AI-Powered Quality Inspection</h3>
-              <span class="case-tag">AI/ML</span>
-            </div>
-            <p>
-              Created a computer vision system for automated quality inspection,
-              reducing defect rates by 45% and inspection time by 60%.
-            </p>
-            <div class="case-metrics">
-              <span>⏱️ 6 months</span> <span>👥 10 engineers</span>
-              <span>📈 45% defect reduction</span>
-            </div>
-          </div>
-          <div class="case-card">
-            <div class="case-header">
-              <h3>✈️ Avionics System Modernization</h3>
-              <span class="case-tag">Aerospace</span>
-            </div>
-            <p>
-              Upgraded legacy avionics systems with modern embedded software
-              architecture, ensuring compliance with DO-178C standards.
-            </p>
-            <div class="case-metrics">
-              <span>⏱️ 18 months</span> <span>👥 30 engineers</span>
-              <span>📈 DO-178C certified</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Insights Page -->
-      <div class="page-content" id="insights-page" style="display: none">
-        <h1>Insights &amp; Resources</h1>
-        <p class="hero-subtitle">Stay Updated with Latest Trends</p>
-        <div class="insights-section">
-          <h2>📝 Latest Blogs</h2>
-          <div class="insights-grid">
-            <div class="insight-card">
-              <div class="insight-date">Dec 15, 2024</div>
-              <h3>The Future of AUTOSAR Adaptive Platform</h3>
-              <p>
-                Exploring the evolution of AUTOSAR and its role in
-                next-generation vehicle architectures.
-              </p>
-              <a href="#" class="read-more">Read More →</a>
-            </div>
-            <div class="insight-card">
-              <div class="insight-date">Dec 10, 2024</div>
-              <h3>AI in Automotive: Beyond Autonomous Driving</h3>
-              <p>
-                How artificial intelligence is transforming every aspect of
-                modern vehicles.
-              </p>
-              <a href="#" class="read-more">Read More →</a>
-            </div>
-            <div class="insight-card">
-              <div class="insight-date">Dec 5, 2024</div>
-              <h3>Cybersecurity in Connected Vehicles</h3>
-              <p>
-                Best practices for securing automotive systems against emerging
-                threats.
-              </p>
-              <a href="#" class="read-more">Read More →</a>
-            </div>
-          </div>
-        </div>
-        <div class="insights-section">
-          <h2>📄 Whitepapers</h2>
-          <div class="insights-grid">
-            <div class="insight-card">
-              <h3>Embedded Systems Security Framework</h3>
-              <p>
-                Comprehensive guide to implementing security in embedded
-                automotive systems.
-              </p>
-              <a href="#" class="read-more">Download PDF →</a>
-            </div>
-            <div class="insight-card">
-              <h3>Industry 4.0 Implementation Guide</h3>
-              <p>
-                Step-by-step approach to digital transformation in
-                manufacturing.
-              </p>
-              <a href="#" class="read-more">Download PDF →</a>
-            </div>
-          </div>
-        </div>
-        <div class="insights-section">
-          <h2>📰 News &amp; Press Releases</h2>
-          <div class="news-list">
-            <div class="news-item">
-              <span class="news-date">Jan 2, 2025</span>
-              <h3>IAST Expands R&amp;D Facilities in Bengaluru</h3>
-              <p>
-                New 50,000 sq ft innovation center to accelerate automotive
-                technology development.
-              </p>
-            </div>
-            <div class="news-item">
-              <span class="news-date">Dec 20, 2024</span>
-              <h3>Partnership with Leading OEM for EV Platform</h3>
-              <p>
-                IAST selected as technology partner for next-generation electric
-                vehicle platform.
-              </p>
-            </div>
-            <div class="news-item">
-              <span class="news-date">Dec 15, 2024</span>
-              <h3>Award for Excellence in Automotive Innovation</h3>
-              <p>
-                Recognized for outstanding contributions to ADAS technology
-                advancement.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Careers Page -->
-      <div class="page-content" id="careers-page" style="display: none">
-        <h1>Careers at IAST</h1>
-        <p class="hero-subtitle">Join Our Team of Innovators</p>
-        <div class="content-section">
-          <h2>Why Work With Us?</h2>
-          <div class="benefits-grid">
-            <div class="benefit-card">
-              <div class="benefit-icon">🚀</div>
-              <h3>Cutting-Edge Projects</h3>
-              <p>
-                Work on innovative technology that shapes the future of
-                automotive and embedded systems.
-              </p>
-            </div>
-            <div class="benefit-card">
-              <div class="benefit-icon">📚</div>
-              <h3>Learning &amp; Growth</h3>
-              <p>
-                Continuous training programs and certifications to advance your
-                career.
-              </p>
-            </div>
-            <div class="benefit-card">
-              <div class="benefit-icon">🌟</div>
-              <h3>Work-Life Balance</h3>
-              <p>
-                Flexible work arrangements and comprehensive benefits package.
-              </p>
-            </div>
-            <div class="benefit-card">
-              <div class="benefit-icon">🤝</div>
-              <h3>Collaborative Culture</h3>
-              <p>
-                Work with talented professionals in a supportive and inclusive
-                environment.
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="content-section">
-          <h2>🔍 Current Openings</h2>
-          <div class="job-listings">
-            <div class="job-card">
-              <h3>Senior Embedded Software Engineer</h3>
-              <div class="job-meta">
-                <span>📍 Bengaluru</span> <span>💼 Full-time</span>
-                <span>⏰ 5-8 years</span>
-              </div>
-              <p>
-                Looking for experienced embedded software engineers with
-                expertise in RTOS and automotive systems.
-              </p>
-              <button class="apply-btn">Apply Now</button>
-            </div>
-            <div class="job-card">
-              <h3>AUTOSAR Architect</h3>
-              <div class="job-meta">
-                <span>📍 Bengaluru</span> <span>💼 Full-time</span>
-                <span>⏰ 8-12 years</span>
-              </div>
-              <p>
-                Seeking AUTOSAR experts to design and implement complex
-                automotive software architectures.
-              </p>
-              <button class="apply-btn">Apply Now</button>
-            </div>
-            <div class="job-card">
-              <h3>AI/ML Engineer</h3>
-              <div class="job-meta">
-                <span>📍 Bengaluru</span> <span>💼 Full-time</span>
-                <span>⏰ 3-6 years</span>
-              </div>
-              <p>
-                Join our AI team to develop computer vision and machine learning
-                solutions for automotive applications.
-              </p>
-              <button class="apply-btn">Apply Now</button>
-            </div>
-            <div class="job-card">
-              <h3>Product Manager - Embedded Systems</h3>
-              <div class="job-meta">
-                <span>📍 Bengaluru</span> <span>💼 Full-time</span>
-                <span>⏰ 6-10 years</span>
-              </div>
-              <p>
-                Lead product strategy and roadmap for our embedded systems
-                portfolio.
-              </p>
-              <button class="apply-btn">Apply Now</button>
-            </div>
-          </div>
-        </div>
-        <div class="content-section">
-          <h2>🎓 Internship Program</h2>
-          <p>
-            We offer comprehensive internship programs for students and recent
-            graduates passionate about technology. Gain hands-on experience
-            working on real-world projects alongside industry experts.
-          </p>
-          <button class="apply-btn">Apply for Internship</button>
-        </div>
-      </div>
-      <!-- Life at IAST Page -->
-      <div class="page-content" id="life-page" style="display: none">
-        <h1>Life @ IAST</h1>
-        <p class="hero-subtitle">Where Innovation Meets Passion</p>
-        <div class="content-section">
-          <h2>Our Culture</h2>
-          <p>
-            At IAST, we believe in fostering a culture of innovation,
-            collaboration, and continuous learning. Our workplace is designed to
-            inspire creativity and enable our team members to achieve their full
-            potential.
-          </p>
-        </div>
-        <div class="life-features-grid">
-          <div class="life-feature-card">
-            <div class="life-icon">🌟</div>
-            <h3>Innovation Hub</h3>
-            <p>
-              State-of-the-art facilities with cutting-edge technology and
-              research labs
-            </p>
-          </div>
-          <div class="life-feature-card">
-            <div class="life-icon">🎓</div>
-            <h3>Continuous Learning</h3>
-            <p>
-              Regular training programs, certifications, and knowledge-sharing
-              sessions
-            </p>
-          </div>
-          <div class="life-feature-card">
-            <div class="life-icon">🤝</div>
-            <h3>Team Collaboration</h3>
-            <p>Open work environment encouraging cross-functional teamwork</p>
-          </div>
-          <div class="life-feature-card">
-            <div class="life-icon">⚖️</div>
-            <h3>Work-Life Balance</h3>
-            <p>Flexible working hours and comprehensive wellness programs</p>
-          </div>
-          <div class="life-feature-card">
-            <div class="life-icon">🎉</div>
-            <h3>Fun Activities</h3>
-            <p>
-              Regular team outings, celebrations, and recreational activities
-            </p>
-          </div>
-          <div class="life-feature-card">
-            <div class="life-icon">🏆</div>
-            <h3>Recognition</h3>
-            <p>
-              Performance-based rewards and career advancement opportunities
-            </p>
-          </div>
-        </div>
-        <div class="content-section" id="testimonials">
-          <h2>What Our Employees Say</h2>
-          <div class="testimonials-grid">
-            <div class="testimonial-card">
-              <div class="testimonial-quote">"</div>
-              <p class="testimonial-text">
-                IAST has been an incredible place to grow my career. The
-                challenging projects and supportive team environment have helped
-                me develop skills I never thought possible. The leadership truly
-                cares about employee growth.
-              </p>
-              <div class="testimonial-author">
-                <div class="author-avatar">👨‍💻</div>
-                <div class="author-info">
-                  <h4>Rajesh Kumar</h4>
-                  <p>Senior Embedded Engineer</p>
-                  <span class="tenure">5 years at IAST</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-quote">"</div>
-              <p class="testimonial-text">
-                The work-life balance here is exceptional. Management
-                understands the importance of personal time while ensuring we
-                deliver high-quality work. The flexible work policy has made a
-                huge difference in my life.
-              </p>
-              <div class="testimonial-author">
-                <div class="author-avatar">👩‍💼</div>
-                <div class="author-info">
-                  <h4>Priya Sharma</h4>
-                  <p>AUTOSAR Architect</p>
-                  <span class="tenure">3 years at IAST</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-quote">"</div>
-              <p class="testimonial-text">
-                Working on cutting-edge AI and computer vision projects has been
-                a dream come true. IAST invests heavily in R&amp;D and
-                encourages us to explore innovative solutions. The learning
-                opportunities are endless.
-              </p>
-              <div class="testimonial-author">
-                <div class="author-avatar">👨‍🔬</div>
-                <div class="author-info">
-                  <h4>Amit Patel</h4>
-                  <p>AI/ML Lead</p>
-                  <span class="tenure">4 years at IAST</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-quote">"</div>
-              <p class="testimonial-text">
-                The collaborative culture at IAST is what sets it apart.
-                Cross-functional teams work seamlessly together, and there's
-                always someone willing to help. It feels like a family where
-                everyone's success matters.
-              </p>
-              <div class="testimonial-author">
-                <div class="author-avatar">👩‍💻</div>
-                <div class="author-info">
-                  <h4>Sneha Reddy</h4>
-                  <p>Product Manager</p>
-                  <span class="tenure">6 years at IAST</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-quote">"</div>
-              <p class="testimonial-text">
-                Starting my career at IAST was the best decision I made. The
-                mentorship program helped me transition from college to
-                professional life smoothly. The company truly invests in
-                nurturing young talent.
-              </p>
-              <div class="testimonial-author">
-                <div class="author-avatar">👨‍🎓</div>
-                <div class="author-info">
-                  <h4>Karthik Iyer</h4>
-                  <p>Software Engineer</p>
-                  <span class="tenure">2 years at IAST</span>
-                </div>
-              </div>
-            </div>
-            <div class="testimonial-card">
-              <div class="testimonial-quote">"</div>
-              <p class="testimonial-text">
-                The diversity and inclusion initiatives at IAST create a
-                welcoming environment for everyone. I feel valued and respected,
-                and the company actively promotes equal opportunities for career
-                advancement.
-              </p>
-              <div class="testimonial-author">
-                <div class="author-avatar">👩‍🔧</div>
-                <div class="author-info">
-                  <h4>Lakshmi Menon</h4>
-                  <p>Testing Lead</p>
-                  <span class="tenure">7 years at IAST</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="content-section">
-          <h2>Ready to Join Us?</h2>
-          <p style="text-align: center; margin-bottom: 30px">
-            Explore exciting career opportunities and become part of our
-            innovative team
-          </p>
-          <div style="text-align: center">
-            <button class="cta-btn" onclick="showPage('careers-page')">
-              View Job Openings →
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Contact Page -->
-      <div class="page-content" id="contact-page" style="display: none">
-        <h1>Get in Touch</h1>
-        <p class="hero-subtitle">Let's Discuss Your Project</p>
-        <div class="contact-layout">
-          <div class="contact-form-section">
-            <h2>Send Us a Message</h2>
-            <form class="contact-form" id="contactForm">
-              <div class="form-group">
-                <label for="name">Full Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  placeholder="Enter your name"
-                />
-              </div>
-              <div class="form-group">
-                <label for="email">Email Address *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              <div class="form-group">
-                <label for="phone">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  placeholder="+91 12345 67890"
-                />
-              </div>
-              <div class="form-group">
-                <label for="company">Company Name</label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  placeholder="Your company"
-                />
-              </div>
-              <div class="form-group">
-                <label for="subject">Subject *</label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  required
-                  placeholder="How can we help?"
-                />
-              </div>
-              <div class="form-group">
-                <label for="message">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="6"
-                  required
-                  placeholder="Tell us about your project or inquiry..."
-                ></textarea>
-              </div>
-              <button type="submit" class="submit-btn">Send Message</button>
-            </form>
-          </div>
-          <div class="contact-info-section">
-            <h2>Contact Information</h2>
-            <div class="contact-info-card">
-              <div class="info-icon">📧</div>
-              <h3>Email</h3>
-              <a href="mailto:info@iast-india.com">info@iast-india.com</a>
-              <a href="mailto:business@iast-india.com"
-                >business@iast-india.com</a
-              >
-            </div>
-            <div class="contact-info-card">
-              <div class="info-icon">📞</div>
-              <h3>Phone</h3>
-              <a href="tel:+919876543210">+91 98765 43210</a>
-              <a href="tel:+918012345678">+91 80123 45678</a>
-            </div>
-            <div class="contact-info-card">
-              <div class="info-icon">📍</div>
-              <h3>Office Address</h3>
-              <p>
-                IAST Software Solutions Pvt. Ltd.<br />
-                Whitefield, Bengaluru - 560066<br />
-                Karnataka, India
-              </p>
-            </div>
-            <div class="contact-info-card">
-              <div class="info-icon">🕐</div>
-              <h3>Business Hours</h3>
-              <p>
-                Monday - Friday: 9:00 AM - 6:00 PM<br />
-                Saturday: 9:00 AM - 1:00 PM<br />
-                Sunday: Closed
-              </p>
-            </div>
-            <div class="social-connect">
-              <h3>Connect With Us</h3>
-              <div class="social-buttons">
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="social-btn"
-                  >💼 LinkedIn</a
-                >
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="social-btn"
-                  >📷 Instagram</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+ 
+
     </main>
+
     <!-- Footer Section -->
-    <footer>
-      <div class="footer-container">
-        <!-- Row 1: Contact Details -->
-        <div class="footer-contact">
-          <h2 class="footer-section-title">Contact Us</h2>
-          <div class="contact-details">
-            <div class="contact-item">
-              <span class="contact-icon">📧</span>
-              <div>
-                <strong>Email:</strong>
-                <a href="mailto:info@iast-india.com">info@iast-india.com</a>
-              </div>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">📞</span>
-              <div>
-                <strong>Phone:</strong>
-                <a href="tel:+919876543210">+91 98765 43210</a>
-              </div>
-            </div>
-          </div>
-          <h2 class="footer-section-title" style="margin-top: 40px">
-            Our Locations
-          </h2>
-          <div class="locations-grid">
-            <div class="location-card">
-              <h4>🏢 Bengaluru Office (Headquarters)</h4>
-              <p>
-                IAST Software Solutions Pvt. Ltd.<br />
-                Whitefield, Bengaluru - 560066<br />
-                Karnataka, India
-              </p>
-            </div>
-            <div class="location-card">
-              <h4>🏢 Pune Office</h4>
-              <p>
-                IAST Software Solutions Pvt. Ltd.<br />
-                Hinjewadi IT Park, Pune - 411057<br />
-                Maharashtra, India
-              </p>
-            </div>
-            <div class="location-card">
-              <h4>🏢 Chennai Office</h4>
-              <p>
-                IAST Software Solutions Pvt. Ltd.<br />
-                OMR, Chennai - 600096<br />
-                Tamil Nadu, India
-              </p>
-            </div>
-            <div class="location-card">
-              <h4>🏢 Hyderabad Office</h4>
-              <p>
-                IAST Software Solutions Pvt. Ltd.<br />
-                HITEC City, Hyderabad - 500081<br />
-                Telangana, India
-              </p>
-            </div>
-          </div>
-        </div>
-        <!-- Row 2: Quick Links -->
-        <div class="footer-links">
-          <!-- Column 1: Company -->
-          <div class="footer-column">
-            <h3>Company</h3>
-            <ul>
-              <li><a href="#about">About Us</a></li>
-              <li><a href="#leadership">Leadership Team</a></li>
-              <li><a href="#vision">Vision, Mission &amp; Values</a></li>
-              <li><a href="#infrastructure">Infrastructure &amp; Labs</a></li>
-            </ul>
-          </div>
-          <!-- Column 2: Services -->
-          <div class="footer-column">
-            <h3>Services</h3>
-            <ul>
-              <li><a href="#embedded">Embedded Software Development</a></li>
-              <li>
-                <a href="#automotive">Automotive &amp; AUTOSAR Solutions</a>
-              </li>
-              <li><a href="#product-eng">Product Engineering</a></li>
-              <li><a href="#ai-ml">AI/ML &amp; Computer Vision</a></li>
-              <li><a href="#iot">IoT &amp; Cloud Systems</a></li>
-              <li>
-                <a href="#industry4"
-                  >Industry 4.0 &amp; Digital Transformation</a
-                >
-              </li>
-            </ul>
-          </div>
-          <!-- Column 3: Industries -->
-          <div class="footer-column">
-            <h3>Industries</h3>
-            <ul>
-              <li><a href="#auto">Automotive</a></li>
-              <li><a href="#aerospace">Aerospace</a></li>
-              <li><a href="#healthcare">Healthcare</a></li>
-              <li><a href="#industrial">Industrial Automation</a></li>
-              <li><a href="#consumer">Consumer Electronics</a></li>
-              <li>
-                <a href="#semiconductor">Semiconductor &amp; Electronics</a>
-              </li>
-            </ul>
-          </div>
-          <!-- Column 4: Resources & Opportunities -->
-          <div class="footer-column">
-            <h3>Resources &amp; Opportunities</h3>
-            <ul>
-              <li><a href="#cases">Case Studies</a></li>
-              <li><a href="#blogs">Blogs</a></li>
-              <li><a href="#whitepapers">Whitepapers</a></li>
-              <li><a href="#news">News &amp; Press Releases</a></li>
-              <li><a href="#careers">Careers</a></li>
-              <li><a href="#internships">Internships</a></li>
-              <li>
-                <a href="#ctv" class="highlight"
-                  >CTV – Training &amp; Workshops</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!-- Row 3: Social Media & Copyright -->
-        <div class="footer-bottom">
-          <div class="social-links">
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-icon"
-              aria-label="LinkedIn"
-            >
-              💼
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="social-icon"
-              aria-label="Instagram"
-            >
-              📷
-            </a>
-          </div>
-          <p class="copyright">© 2025 IAST. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
-    <script>
-      const defaultConfig = {
-        company_name: "IAST",
-        floating_cta_text: "Request Proposal",
-        secondary_cta_text: "CTV – Training & Workshops",
-        primary_color: "#004AAD",
-        accent_color: "#FF7A00",
-        background_color: "#0a0e27",
-        text_color: "#ffffff",
-        glass_opacity: 0.08,
-        font_family: "Poppins",
-        font_size: 15,
-      };
+    <div id="footer-root"></div>
+    <script src="js/include-footer.js" defer></script>
 
-      async function onConfigChange(config) {
-        const companyName = config.company_name || defaultConfig.company_name;
-        const floatingCtaText =
-          config.floating_cta_text || defaultConfig.floating_cta_text;
-        const secondaryCtaText =
-          config.secondary_cta_text || defaultConfig.secondary_cta_text;
-        const primaryColor =
-          config.primary_color || defaultConfig.primary_color;
-        const accentColor = config.accent_color || defaultConfig.accent_color;
-        const backgroundColor =
-          config.background_color || defaultConfig.background_color;
-        const textColor = config.text_color || defaultConfig.text_color;
-        const fontFamily = config.font_family || defaultConfig.font_family;
-        const fontSize = config.font_size || defaultConfig.font_size;
+    <!-- loader script: injects navbar.html and loads navbar.js & main.js -->
+    <script src="js/include-navbar.js" defer></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/php-email-form/validate.js"></script>
+    <script src="assets/vendor/aos/aos.js"></script>
+    <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
 
-        document.getElementById("company-name").textContent = companyName;
-        document.getElementById("floating-cta").textContent = floatingCtaText;
-        document
-          .getElementById("secondary-cta")
-          .querySelector("span").textContent = secondaryCtaText;
-
-        document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #1a1d3a 50%, ${backgroundColor} 100%)`;
-        document.body.style.fontFamily = `${fontFamily}, sans-serif`;
-
-        const allText = document.querySelectorAll(
-          ".nav-link, .dropdown-item, .logo, h1, h2, h3, p, .btn"
-        );
-        allText.forEach((el) => {
-          el.style.fontFamily = `${fontFamily}, sans-serif`;
-        });
-
-        document.querySelector(".logo").style.color = textColor;
-        document.querySelector(
-          ".logo"
-        ).style.textShadow = `0 0 20px ${primaryColor}99`;
-
-        const navLinks = document.querySelectorAll(".nav-link");
-        navLinks.forEach((link) => {
-          link.style.color = textColor;
-          link.style.fontSize = `${fontSize}px`;
-        });
-
-        const floatingBtn = document.querySelector(".floating-cta");
-        floatingBtn.style.background = accentColor;
-        floatingBtn.style.boxShadow = `0 8px 24px ${accentColor}66`;
-
-        const secondaryBtn = document.querySelector(".btn-secondary");
-        secondaryBtn.style.borderColor = primaryColor;
-        secondaryBtn.style.color = textColor;
-
-        const dropdownItems = document.querySelectorAll(".dropdown-item");
-        dropdownItems.forEach((item) => {
-          item.style.fontSize = `${fontSize - 1}px`;
-        });
-
-        const buttons = document.querySelectorAll(".btn");
-        buttons.forEach((btn) => {
-          btn.style.fontSize = `${fontSize - 1}px`;
-        });
-
-        const h1Elements = document.querySelectorAll("h1");
-        h1Elements.forEach((h) => (h.style.fontSize = `${fontSize * 3.73}px`));
-
-        const h3Elements = document.querySelectorAll("h3");
-        h3Elements.forEach((h) => (h.style.fontSize = `${fontSize * 1.33}px`));
-
-        const paragraphs = document.querySelectorAll("p");
-        paragraphs.forEach((p) => (p.style.fontSize = `${fontSize * 1.33}px`));
-      }
-
-      function mapToCapabilities(config) {
-        return {
-          recolorables: [
-            {
-              get: () =>
-                config.background_color || defaultConfig.background_color,
-              set: (value) => {
-                config.background_color = value;
-                if (window.elementSdk) {
-                  window.elementSdk.setConfig({ background_color: value });
-                }
-              },
-            },
-            {
-              get: () => config.text_color || defaultConfig.text_color,
-              set: (value) => {
-                config.text_color = value;
-                if (window.elementSdk) {
-                  window.elementSdk.setConfig({ text_color: value });
-                }
-              },
-            },
-            {
-              get: () => config.primary_color || defaultConfig.primary_color,
-              set: (value) => {
-                config.primary_color = value;
-                if (window.elementSdk) {
-                  window.elementSdk.setConfig({ primary_color: value });
-                }
-              },
-            },
-            {
-              get: () => config.accent_color || defaultConfig.accent_color,
-              set: (value) => {
-                config.accent_color = value;
-                if (window.elementSdk) {
-                  window.elementSdk.setConfig({ accent_color: value });
-                }
-              },
-            },
-          ],
-          borderables: [],
-          fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
-            set: (value) => {
-              config.font_family = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ font_family: value });
-              }
-            },
-          },
-          fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
-            set: (value) => {
-              config.font_size = value;
-              if (window.elementSdk) {
-                window.elementSdk.setConfig({ font_size: value });
-              }
-            },
-          },
-        };
-      }
-
-      function mapToEditPanelValues(config) {
-        return new Map([
-          ["company_name", config.company_name || defaultConfig.company_name],
-          [
-            "floating_cta_text",
-            config.floating_cta_text || defaultConfig.floating_cta_text,
-          ],
-          [
-            "secondary_cta_text",
-            config.secondary_cta_text || defaultConfig.secondary_cta_text,
-          ],
-        ]);
-      }
-
-      if (window.elementSdk) {
-        window.elementSdk.init({
-          defaultConfig,
-          onConfigChange,
-          mapToCapabilities,
-          mapToEditPanelValues,
-        });
-      }
-
-      // Carousel functionality
-      let currentSlide = 0;
-      const slidesToShow = 3;
-
-      function moveCarousel(direction) {
-        const carousel = document.getElementById("servicesCarousel");
-        const cards = carousel.querySelectorAll(".carousel-card");
-        const totalSlides = cards.length;
-        const maxSlide = Math.max(0, totalSlides - slidesToShow);
-
-        currentSlide += direction;
-
-        if (currentSlide < 0) {
-          currentSlide = maxSlide;
-        } else if (currentSlide > maxSlide) {
-          currentSlide = 0;
-        }
-
-        const cardWidth = cards[0].offsetWidth;
-        const gap = 24;
-        const offset = -(currentSlide * (cardWidth + gap));
-
-        carousel.style.transform = `translateX(${offset}px)`;
-      }
-
-      // Auto-play carousel
-      setInterval(() => {
-        moveCarousel(1);
-      }, 5000);
-
-      // Hero Carousel functionality
-      let currentHeroSlide = 0;
-      let heroAutoPlayInterval;
-
-      function showHeroSlide(index) {
-        const slides = document.querySelectorAll(".hero-slide");
-        const dots = document.querySelectorAll(".hero-dot");
-
-        // Remove active class from all slides and dots
-        slides.forEach((slide) => slide.classList.remove("hero-slide-active"));
-        dots.forEach((dot) => dot.classList.remove("hero-dot-active"));
-
-        // Wrap around if needed
-        if (index >= slides.length) {
-          currentHeroSlide = 0;
-        } else if (index < 0) {
-          currentHeroSlide = slides.length - 1;
-        } else {
-          currentHeroSlide = index;
-        }
-
-        // Add active class to current slide and dot
-        slides[currentHeroSlide].classList.add("hero-slide-active");
-        dots[currentHeroSlide].classList.add("hero-dot-active");
-      }
-
-      function goToHeroSlide(index) {
-        showHeroSlide(index);
-        // Reset auto-play timer
-        clearInterval(heroAutoPlayInterval);
-        startHeroAutoPlay();
-      }
-
-      function nextHeroSlide() {
-        showHeroSlide(currentHeroSlide + 1);
-      }
-
-      function startHeroAutoPlay() {
-        heroAutoPlayInterval = setInterval(() => {
-          nextHeroSlide();
-        }, 5000);
-      }
-
-      // Start hero carousel auto-play
-      startHeroAutoPlay();
-
-      // Page navigation functionality
-      function showPage(pageId) {
-        // Hide all pages
-        const allPages = document.querySelectorAll(".page-content");
-        allPages.forEach((page) => {
-          page.style.display = "none";
-        });
-
-        // Show selected page
-        const selectedPage = document.getElementById(pageId);
-        if (selectedPage) {
-          selectedPage.style.display = "block";
-
-          // Scroll to top smoothly
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
-        }
-      }
-
-      // Scroll to section within page
-      function scrollToSection(sectionId) {
-        setTimeout(() => {
-          const section = document.getElementById(sectionId);
-          if (section) {
-            section.scrollIntoView({ behavior: "smooth", block: "start" });
-          }
-        }, 300);
-      }
-
-      // Contact form handling
-      const contactForm = document.getElementById("contactForm");
-      if (contactForm) {
-        contactForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          // Get form data
-          const formData = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            company: document.getElementById("company").value,
-            subject: document.getElementById("subject").value,
-            message: document.getElementById("message").value,
-          };
-
-          // Show success message
-          const submitBtn = contactForm.querySelector(".submit-btn");
-          const originalText = submitBtn.textContent;
-          submitBtn.textContent = "✓ Message Sent!";
-          submitBtn.style.background = "#28a745";
-
-          // Reset form
-          contactForm.reset();
-
-          // Reset button after 3 seconds
-          setTimeout(() => {
-            submitBtn.textContent = originalText;
-            submitBtn.style.background = "#FF7A00";
-          }, 3000);
-        });
-      }
-
-      // Apply button handling
-      const applyButtons = document.querySelectorAll(".apply-btn");
-      applyButtons.forEach((btn) => {
-        btn.addEventListener("click", function (e) {
-          e.preventDefault();
-          const originalText = this.textContent;
-          this.textContent = "✓ Application Sent!";
-          this.style.background = "#28a745";
-
-          setTimeout(() => {
-            this.textContent = originalText;
-            this.style.background = "#FF7A00";
-          }, 3000);
-        });
-      });
-    </script>
-    <script>
-      (function () {
-        function c() {
-          var b = a.contentDocument || a.contentWindow.document;
-          if (b) {
-            var d = b.createElement("script");
-            d.innerHTML =
-              "window.__CF$cv$params={r:'9a598596152d3c00',t:'MTc2NDMyOTMwNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
-            b.getElementsByTagName("head")[0].appendChild(d);
-          }
-        }
-        if (document.body) {
-          var a = document.createElement("iframe");
-          a.height = 1;
-          a.width = 1;
-          a.style.position = "absolute";
-          a.style.top = 0;
-          a.style.left = 0;
-          a.style.border = "none";
-          a.style.visibility = "hidden";
-          document.body.appendChild(a);
-          if ("loading" !== document.readyState) c();
-          else if (window.addEventListener)
-            document.addEventListener("DOMContentLoaded", c);
-          else {
-            var e = document.onreadystatechange || function () {};
-            document.onreadystatechange = function (b) {
-              e(b);
-              "loading" !== document.readyState &&
-                ((document.onreadystatechange = e), c());
-            };
-          }
-        }
-      })();
-    </script>
+    <!-- Main JS File -->
+    <script src="assets/js/main1.js"></script>
   </body>
 </html>
