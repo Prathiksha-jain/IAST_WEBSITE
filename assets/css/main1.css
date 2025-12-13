@@ -401,6 +401,7 @@ section,
   transition: all 0.3s ease;
 }
 
+
 .services .services-showcase .services-list .service-item:last-child {
   border-bottom: none;
 }
@@ -570,6 +571,17 @@ section,
 
   .services .additional-services .service-card .card-body {
     padding: 2rem 1.5rem;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .services .services-showcase .services-list {
+    height: auto !important; /* allow natural vertical height */
+  }
+
+  .services .services-showcase .featured-service {
+    height: auto !important;
   }
 }
 
@@ -1164,6 +1176,88 @@ section,
     font-size: 1.1rem;
   }
 }
+
+
+/* ============================================================
+   FORCE 4 FEATURE TABS TO EXPAND HORIZONTALLY ACROSS THE ROW
+   ============================================================ */
+
+.features .tabs-header .nav {
+  display: flex !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+}
+
+.features .tabs-header .nav-item {
+  flex: 1 1 0 !important;    /* Each tab gets equal width */
+  max-width: 25% !important; /* Guarantees 4-per-row horizontal expansion */
+}
+
+.features .tabs-header .nav-link {
+  width: 100% !important;
+  padding: 20px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.features .tabs-header .tab-content-preview {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+
+/* ============================================================
+   RESPONSIVE FEATURE TABS — 2 ROWS ON SMALL SCREENS
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* Make the tab container wrap into two rows */
+  .features .tabs-header .nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    padding: 0 !important;
+    gap: 0 !important; /* optional: add gap if you want spacing */
+  }
+
+  /* Each tab takes 50% width = 2 per row */
+  .features .tabs-header .nav-item {
+    flex: 0 0 50% !important;  /* 2 tabs per row */
+    max-width: 50% !important;
+  }
+
+  /* Adjust padding so tabs don’t look too tall on mobile */
+  .features .tabs-header .nav-link {
+    padding: 16px 10px !important;
+  }
+
+  /* Center & scale text for mobile */
+  .features .tab-content-preview {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .features .tab-number {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 12px !important;
+  }
+
+  .features .tab-text h6 {
+    font-size: 13px !important;
+  }
+
+  .features .tab-text small {
+    font-size: 11px !important;
+  }
+}
+
 
 
 /*--------------------------------------------------------------
