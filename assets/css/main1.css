@@ -27,7 +27,6 @@
 }
 
 
-
 /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
@@ -282,315 +281,230 @@ section,
   text-wrap: balance;
 }
 
-
-
 /*--------------------------------------------------------------
-# Services Section
+# About Us Section
 --------------------------------------------------------------*/
-.services .services-showcase {
+.about-us .about-showcase {
   margin-bottom: 6rem;
 }
 
-.services .services-showcase .featured-service {
+/* Force equal height columns */
+.about-us .about-showcase .row {
+  align-items: stretch;
+}
+
+/* LEFT: Featured About */
+.about-us .about-showcase .about-featured {
   position: relative;
-  height: 600px;
   overflow: hidden;
-}
-
-.services .services-showcase .featured-service .service-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
   height: 100%;
+  min-height: 50vh;
 }
 
-.services .services-showcase .featured-service .service-image img {
+.about-us .about-showcase .about-featured .about-image {
+  position: absolute;
+  inset: 0;
+}
+
+.about-us .about-showcase .about-featured .about-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
 
-.services .services-showcase .featured-service .service-overlay {
+.about-us .about-showcase .about-featured .about-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, color-mix(in srgb, var(--heading-color), transparent 20%) 0%, color-mix(in srgb, var(--accent-color), transparent 30%) 100%);
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    color-mix(in srgb, var(--heading-color), transparent 25%) 0%,
+    color-mix(in srgb, var(--accent-color), transparent 35%) 100%
+  );
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: all 0.4s ease;
+  transition: opacity 0.4s ease;
 }
 
-.services .services-showcase .featured-service .service-overlay .overlay-content {
+.about-us .about-showcase .about-featured .about-overlay .overlay-content {
   text-align: center;
   color: var(--contrast-color);
   padding: 2rem;
-  transform: translateY(30px);
+  transform: translateY(20px);
   transition: transform 0.4s ease;
 }
 
-.services .services-showcase .featured-service .service-overlay .overlay-content h3 {
-  font-size: 2.5rem;
+.about-us .about-showcase .about-featured .about-overlay .overlay-content h3 {
+  font-size: 2.1rem;
   font-weight: 300;
   margin-bottom: 1rem;
-  color: var(--contrast-color);
 }
 
-.services .services-showcase .featured-service .service-overlay .overlay-content p {
-  font-size: 1.1rem;
+.about-us .about-showcase .about-featured .about-overlay .overlay-content p {
+  font-size: 1rem;
   line-height: 1.6;
-  margin-bottom: 2rem;
+  margin-bottom: 1.75rem;
   opacity: 0.9;
 }
 
-.services .services-showcase .featured-service .service-overlay .overlay-content .service-link {
+.about-us .about-showcase .about-featured .about-overlay .overlay-content .about-link {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   color: var(--contrast-color);
   text-decoration: none;
-  font-weight: 400;
   border-bottom: 1px solid var(--contrast-color);
   padding-bottom: 4px;
-  transition: all 0.3s ease;
+  font-weight: 400;
 }
 
-.services .services-showcase .featured-service .service-overlay .overlay-content .service-link i {
-  transition: transform 0.3s ease;
-}
-
-.services .services-showcase .featured-service .service-overlay .overlay-content .service-link:hover {
-  color: var(--contrast-color);
-  border-color: transparent;
-}
-
-.services .services-showcase .featured-service .service-overlay .overlay-content .service-link:hover i {
-  transform: translateX(5px);
-}
-
-.services .services-showcase .featured-service:hover .service-overlay {
+.about-us .about-showcase .about-featured:hover .about-overlay {
   opacity: 1;
 }
 
-.services .services-showcase .featured-service:hover .service-overlay .overlay-content {
+.about-us .about-showcase .about-featured:hover .overlay-content {
   transform: translateY(0);
 }
 
-.services .services-showcase .featured-service:hover .service-image img {
+.about-us .about-showcase .about-featured:hover img {
   transform: scale(1.05);
 }
 
-.services .services-showcase .services-list {
+/* RIGHT: About Highlights */
+.about-us .about-showcase .about-highlights {
   display: flex;
   flex-direction: column;
-  height: 600px;
+  height: 100%;
   background: var(--surface-color);
 }
 
-.services .services-showcase .services-list .service-item {
+.about-us .about-showcase .about-highlights .highlight-item {
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 3rem 4rem;
+  padding: 2rem 2.5rem;
   border-bottom: 1px solid color-mix(in srgb, var(--default-color), transparent 92%);
-  transition: all 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
-
-.services .services-showcase .services-list .service-item:last-child {
+.about-us .about-showcase .about-highlights .highlight-item:last-child {
   border-bottom: none;
 }
 
-.services .services-showcase .services-list .service-item:hover {
+.about-us .about-showcase .about-highlights .highlight-item:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 95%);
-  transform: translateX(10px);
+  transform: translateX(8px);
 }
 
-.services .services-showcase .services-list .service-item .service-icon {
-  flex-shrink: 0;
-  width: 60px;
-  height: 60px;
+.about-us .about-showcase .about-highlights .highlight-item .highlight-icon {
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 2rem;
+  margin-right: 1.75rem;
+  flex-shrink: 0;
 }
 
-.services .services-showcase .services-list .service-item .service-icon i {
-  font-size: 1.5rem;
+.about-us .about-showcase .about-highlights .highlight-item .highlight-icon i {
+  font-size: 1.35rem;
   color: var(--accent-color);
+  opacity: 0.85;
 }
 
-.services .services-showcase .services-list .service-item .service-content h4 {
-  font-size: 1.25rem;
+.about-us .about-showcase .about-highlights .highlight-item .highlight-content h4 {
+  font-size: 1.2rem;
   font-weight: 400;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
 }
 
-.services .services-showcase .services-list .service-item .service-content h4 a {
-  color: var(--heading-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.services .services-showcase .services-list .service-item .service-content h4 a:hover {
-  color: var(--accent-color);
-}
-
-.services .services-showcase .services-list .service-item .service-content p {
+.about-us .about-showcase .about-highlights .highlight-item .highlight-content p {
   font-size: 0.95rem;
   line-height: 1.6;
-  color: color-mix(in srgb, var(--default-color), transparent 30%);
+  color: color-mix(in srgb, var(--default-color), transparent 20%);
   margin: 0;
 }
 
-.services .additional-services .service-card {
+/* ABOUT EXTRA CARDS */
+.about-us .about-extra .about-card {
   background: var(--surface-color);
-  transition: all 0.4s ease;
   height: 100%;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.services .additional-services .service-card .card-image {
-  overflow: hidden;
+.about-us .about-extra .about-card .card-image {
   height: 250px;
+  overflow: hidden;
 }
 
-.services .additional-services .service-card .card-image img {
+.about-us .about-extra .about-card .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.4s ease;
 }
 
-.services .additional-services .service-card .card-body {
-  padding: 2.5rem 2rem;
+.about-us .about-extra .about-card .card-body {
+  padding: 2.25rem 2rem;
 }
 
-.services .additional-services .service-card .card-body h5 {
-  font-size: 1.375rem;
+.about-us .about-extra .about-card h5 {
+  font-size: 1.35rem;
   font-weight: 400;
   margin-bottom: 1rem;
 }
 
-.services .additional-services .service-card .card-body h5 a {
-  color: var(--heading-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.services .additional-services .service-card .card-body h5 a:hover {
-  color: var(--accent-color);
-}
-
-.services .additional-services .service-card .card-body p {
+.about-us .about-extra .about-card p {
   font-size: 0.95rem;
   line-height: 1.7;
   color: color-mix(in srgb, var(--default-color), transparent 25%);
   margin-bottom: 2rem;
 }
 
-.services .additional-services .service-card .card-body .read-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--accent-color);
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
-}
-
-.services .additional-services .service-card .card-body .read-more i {
-  transition: transform 0.3s ease;
-}
-
-.services .additional-services .service-card .card-body .read-more:hover {
-  color: var(--heading-color);
-}
-
-.services .additional-services .service-card .card-body .read-more:hover i {
-  transform: translateX(3px);
-}
-
-.services .additional-services .service-card:hover {
+.about-us .about-extra .about-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 20px 40px color-mix(in srgb, var(--default-color), transparent 85%);
 }
 
-.services .additional-services .service-card:hover .card-image img {
+.about-us .about-extra .about-card:hover img {
   transform: scale(1.05);
 }
 
-@media (max-width: 991px) {
-  .services .services-showcase .featured-service {
-    height: 400px;
-    margin-bottom: 2rem;
-  }
-
-  .services .services-showcase .featured-service .service-overlay .overlay-content {
-    padding: 1.5rem;
-  }
-
-  .services .services-showcase .featured-service .service-overlay .overlay-content h3 {
-    font-size: 2rem;
-  }
-
-  .services .services-showcase .services-list .service-item {
-    padding: 2rem;
-  }
-}
-
+/* RESPONSIVE */
 @media (max-width: 768px) {
-  .services {
-    padding: 80px 0;
+  .about-us .about-showcase .about-featured,
+  .about-us .about-showcase .about-highlights {
+    height: auto;
   }
 
-  .services .intro-content {
-    margin-bottom: 3rem;
-  }
-
-  .services .services-showcase {
-    margin-bottom: 4rem;
-  }
-
-  .services .services-showcase .services-list .service-item {
-    padding: 1.5rem;
+  .about-us .about-showcase .about-highlights .highlight-item {
     flex-direction: column;
     text-align: center;
+    padding: 1.75rem;
   }
 
-  .services .services-showcase .services-list .service-item .service-icon {
+  .about-us .about-showcase .about-highlights .highlight-item .highlight-icon {
     margin-right: 0;
     margin-bottom: 1rem;
   }
-
-  .services .additional-services .service-card .card-body {
-    padding: 2rem 1.5rem;
-  }
 }
 
-
-@media (max-width: 768px) {
-  .services .services-showcase .services-list {
-    height: auto !important; /* allow natural vertical height */
-  }
-
-  .services .services-showcase .featured-service {
-    height: auto !important;
-  }
+.services .additional-services .service-card:hover {
+  box-shadow: 0 20px 40px;
 }
 
-
-@media (min-width: 992px) {
-  .services .services-showcase .featured-service {
-    height: 100%;
-    min-height: 680px;
-  }
+/*--------------------------------------------------------------
+# Base Card Styling (Shared – REQUIRED)
+--------------------------------------------------------------*/
+.service-card,
+.about-card {
+  background: var(--surface-color);
+  border: 1px solid color-mix(in srgb, var(--default-color), transparent 88%);
+  border-radius: 6px;
+  box-shadow: 0 4px 18px color-mix(in srgb, var(--default-color), transparent 92%);
+  overflow: hidden;
 }
 
 
@@ -999,6 +913,31 @@ section,
     transform: translateY(-8px);
   }
 }
+
+/* Center ONLY the percentage + small label */
+.features .tab-content .content-area .highlight-stats {
+  justify-content: center;
+  text-align: center;
+}
+
+.features .tab-content .content-area .highlight-stats .stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Center ONLY the bullet points */
+.features .tab-content .content-area .feature-points {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.features .tab-content .content-area .feature-points .point-item {
+  justify-content: center;
+  text-align: center;
+}
+
 
 /*--------------------------------------------------------------
 # Features Cards Section
@@ -1541,6 +1480,35 @@ section,
   .contact .contact-sidebar .contact-method {
     margin-bottom: 30px;
   }
+}
+
+/* =====================================
+   CONTACT METHOD ACCENT HOVER ONLY
+===================================== */
+
+.contact .contact-sidebar .contact-method {
+  padding: 16px 18px;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* ENTIRE ROW → ACCENT COLOR */
+.contact .contact-sidebar .contact-method:hover {
+  background-color: var(--accent-color);
+}
+
+/* Text turns white */
+.contact .contact-sidebar .contact-method:hover
+.contact-details p,
+.contact .contact-sidebar .contact-method:hover
+.method-label {
+  color: var(--contrast-color);
+}
+
+/* Icon turns white */
+.contact .contact-sidebar .contact-method:hover
+.contact-icon {
+  color: var(--contrast-color);
 }
 
 
@@ -2156,4 +2124,6 @@ section,
   max-width: 90%;  /* keeps text nicely centered */
   text-align: center !important;
 }
+
+
 

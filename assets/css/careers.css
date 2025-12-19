@@ -1,0 +1,343 @@
+
+
+a {
+  text-decoration: none !important;
+}
+
+
+img {
+  margin-bottom: -3px;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+.main-white-button a {
+  display: inline-block;
+  background-color: #ffb03b;
+  font-size: 15px;
+  font-weight: 400;
+  text-transform: capitalize;
+  padding: 12px 25px;
+  border-radius: 7px;
+  letter-spacing: 0.25px;
+  transition: all .3s;
+  color: #000000;
+}
+
+
+.main-white-button a:hover {
+  background-color:#ff9900;
+  color: #fff;
+}
+
+
+/*
+---------------------------------------
+Popular Categories
+---------------------------------------
+*/
+
+
+.popular-categories .section-heading {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+
+.popular-categories .naccs {
+  position: relative;
+  background: color-mix(in srgb, var(--accent-color), transparent 95%);
+  border-radius: 7px;
+}
+
+.popular-categories .icon {
+  display: inline-block;
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 62px;
+  color:#ffb03b;
+  background-color: #fff;
+  margin-right: 15px;
+}
+
+.popular-categories .icon img {
+  max-width: 27px;
+}
+
+.popular-categories .naccs .menu div.first-thumb {
+  border-top-left-radius: 7px;
+}
+
+.popular-categories .naccs .menu div.last-thumb {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.popular-categories .naccs .menu div {
+  color: #000000;
+  font-size: 15px;
+  background-color:#ffb03b;
+  margin-bottom: 1px;
+  height: 126px;
+  text-align: left;
+  padding: 0px 15px;
+  line-height: 126px;
+  cursor: pointer;
+  position: relative;
+  transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.popular-categories .naccs .menu div.active,
+.popular-categories .naccs .menu div.active .thumb {
+  background-color:color-mix(in srgb, var(--accent-color));
+}
+
+.popular-categories ul.nacc {
+  position: relative;
+  min-height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  transition: 0.5s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.popular-categories ul.nacc li {
+  opacity: 0;
+  transform: translateX(-50px);
+  position: absolute;
+  list-style: none;
+  transition: 1s all cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.popular-categories ul.nacc li.active {
+  transition-delay: 0.3s;
+  position: relative;
+  z-index: 2;
+  opacity: 1;
+  transform: translateX(0px);
+}
+
+.popular-categories ul.nacc li {
+  width: 100%;
+}
+
+.popular-categories .nacc .thumb .left-text {
+  margin-left: 30px;
+}
+
+.popular-categories .nacc .thumb .left-text h4 {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 35px;
+  margin-bottom: 30px;
+}
+
+.popular-categories .nacc .thumb .left-text p {
+  color: #fff;
+  margin-bottom: 30px;
+}
+
+.popular-categories .nacc .thumb .right-image {
+  padding: 60px;
+  display: inline-flex;
+} 
+
+.popular-categories .nacc .thumb img {
+  border-radius: 7px;
+}
+
+.popular-categories .nacc .thumb .left-text .main-white-button a{
+  width: 100%;
+  text-align: center;
+}
+
+
+
+
+@media (max-width: 1200px) {
+  .popular-categories .icon {
+    margin-left: 50%;
+    transform: translateX(-33px);
+    text-align: center;
+    display: inline-block;
+  }
+  .category-post .naccs .menu div.active .thumb {
+    position: relative;
+  }
+  .category-post .icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(15px);
+  }
+  .category-post .top-content .top-icon h4 { 
+    left: 86px;
+  }
+  form#search-form {
+    padding: 30px;
+  }
+  .popular-categories .naccs .menu .thumb,
+  .category-post .naccs .menu div h4 {
+    color: transparent;
+  }
+}
+
+@media (max-width: 992px) {
+  form#search-form select,
+  form#search-form input {
+    border: 1px solid #8d99af;
+    border-radius: 7px;
+    margin-bottom: 15px;
+  }
+  form#search-form button {
+    border-radius: 7px;
+  }
+  .listing-page .naccs .menu {
+    margin-bottom: 30px;
+  }
+  .popular-categories .nacc .thumb .left-text {
+    margin: 30px;
+  }
+  .popular-categories .nacc .thumb .right-image {
+    padding: 0px;
+    margin: 0px 30px 30px 30px;
+    display: block;
+  }
+  .popular-categories .naccs .menu div.first-thumb {
+    border-top-right-radius: 7px;
+  }
+  .popular-categories .naccs .menu div.last-thumb {
+    border-bottom-left-radius: 0px;
+  }
+  .recent-listing .item .left-image,
+  .listing-page .item .left-image {
+    float: none;
+    width: 100%;
+  }
+  .category-post .top-content .top-icon .icon {
+    left: 45%;
+  }
+  .recent-listing .item .left-image,
+  .listing-page .item .left-image {
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 7px;
+  }
+  .recent-listing .item .listing-item,
+  .listing-page .item .listing-item {
+    display: inline-block;
+  }
+  .recent-listing .item .right-content ul.rate,
+  .listing-page .item .right-content ul.rate {
+    top: 20px;
+  }
+  .recent-listing .item .right-content .main-white-button,
+  .listing-page .item .right-content .main-white-button {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+    margin-top: 30px;
+  }
+  .recent-listing .item .right-content h4 {
+    margin-top: 20px;
+  }
+  footer {
+    text-align: center;
+  }
+  footer .about,
+  footer .helpful-links {
+    margin-bottom: 45px;
+  }
+  .category-post .icon {
+    transform: translateX(0px);
+  }
+  .category-post .top-content .top-icon,
+  .category-post .nacc .thumb .main-white-button a {
+    text-align: center;
+    width: 100%;
+  }
+  .category-post .nacc .thumb .main-white-button  {
+    margin-top: 30px;
+  }
+  .category-post .top-content .top-icon .icon {
+    margin-left: -60px;
+  }
+  .category-post .top-content .top-icon h4 {
+    left: 86px;
+  }
+  .description .text-icon {
+    margin-top: 30px;
+  }
+  form#contact {
+    margin-top: 45px;
+    margin-bottom: 55px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-banner ul.categories li a {
+    color: transparent;
+  }
+  .header-area .main-nav a.logo {
+    background-image: url(../images/black-logo.png);
+    float: left;
+  }
+  .header-area .logo {
+    margin-left: 0px;
+  }
+  .header-area .main-nav .menu-trigger {
+    right: 15px;
+  }
+  .category-post .icon {
+    transform: translateX(-22px);
+  }
+}
