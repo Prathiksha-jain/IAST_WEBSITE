@@ -3966,3 +3966,60 @@ body:has(#contact) .section-title {
 }
 
 
+:root {
+  --accent-color: #ffab2c;
+  --accent-light: #feb42a; /* lighter hover shade */
+}
+
+.main-nav .nav-link:hover {
+  background-color: var(--accent-light);
+  color: #000;
+  border-radius: 6px;
+}
+
+.main-nav .dropdown-item:hover {
+  background-color: var(--accent-light);
+  color: #000;
+}
+
+.cta-buttons a.btn:hover,
+.cta-buttons a.btn:focus {
+  background-color: var(--accent-light) !important;
+  color: #000 !important;
+  border-color: var(--accent-light) !important;
+}
+
+.cta-buttons a.btn:hover {
+  box-shadow: 0 6px 14px rgba(255, 176, 59, 0.35);
+  transform: translateY(-1px);
+}
+
+
+.nav-link,
+.dropdown-item,
+.cta-buttons a.btn {
+  transition: background-color 0.25s ease,
+              color 0.25s ease,
+              box-shadow 0.25s ease,
+              transform 0.2s ease;
+}
+
+
+.nav-link.active {
+  background-color: var(--accent-light);
+  color: #000;
+  border-radius: 6px;
+}
+
+
+.nav-link.active {
+  background: var(--accent-light) !important;
+  color: #000 !important;
+  border-radius: 6px;
+
+  /* HARD RESET */
+  background-image: none !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 1 !important;
+}
